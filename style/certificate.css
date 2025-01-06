@@ -1,0 +1,213 @@
+#certificates-section .heading {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  text-align: center;
+  color: var(--primary-color-light);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.certificates-container {
+  display: grid; /* Use grid for more control over alignment */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Equal column widths */
+  gap: 1.5rem;
+  padding: 1rem;
+  justify-items: center; /* Ensures all items are centered */
+}
+
+.certificate-card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background-color: #ffffff10;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s, box-shadow 0.4s, background-color 0.3s;
+  animation: fadeInUp 0.6s ease-in-out;
+  width: 100%; /* Ensures each card fits its column */
+  max-width: 350px; /* Limits the card width to avoid overflowing */
+}
+
+.certificate-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.certificate-icon {
+  width: clamp(5rem, 15vw, 10rem);
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.certificate-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.certificate-title 
+  .project-title {
+  font-size: calc(var(--medium-Fsize) + 2px);  
+}
+  font-weight: bold;
+  color: var(--primary-color-light);
+  margin-bottom: 0.5rem;
+}
+
+.certificate-description {
+  font-size: calc(var(--XS-Fsize) + 2px);
+  color: var(--primary-color);
+  opacity: 0.9;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+/* Lightbox Styling */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1000;
+}
+
+.lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-image {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  animation: zoomIn 0.3s ease;
+}
+
+.lightbox-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.8);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1010;
+  transition: color 0.3s ease;
+}
+
+.lightbox-btn:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.lightbox-btn.prev {
+  left: 5%;
+}
+
+.lightbox-btn.next {
+  right: 5%;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.lightbox-close:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.lightbox:after {
+  content: "Click to close";
+  position: absolute;
+  bottom: 10%;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  animation: fadeIn 1.5s ease-in-out infinite;
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .certificates-container {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Keeps a consistent layout even on smaller screens */
+  }
+
+  .certificate-card {
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Ensures card fits */
+    max-width: 300px; /* Adjust max-width on smaller screens */
+  }
+
+  .certificate-icon {
+    width: clamp(4rem, 12vw, 8rem);
+  }
+
+  .lightbox-btn {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .certificate-card {
+    padding: 1rem;
+  }
+
+  .certificate-title {
+    font-size: 1.2rem;
+  }
+
+  .certificate-description {
+    font-size: 1rem;
+  }
+}
