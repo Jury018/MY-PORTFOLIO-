@@ -56,6 +56,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     .btn:hover {
       background-color: darkred;  
     }
+
+    .word-warning {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 5px;
+      display: none;
+    }
   `;
   document.head.appendChild(style);
 
@@ -79,6 +86,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const emailInput = form.querySelector('#email');
     const messageInput = form.querySelector('#message');
 
+    // Add a word limit warning message
+    const wordWarning = document.createElement('p');
+    wordWarning.className = 'word-warning';
+    wordWarning.textContent = 'Feedback must be between 5 and 10 words.';
+    messageInput.parentNode.appendChild(wordWarning);
+
     // Get modal elements
     const alertMessage = document.querySelector("#alertMessage");
     const closeAlert = document.querySelector("#closeAlert");
@@ -94,9 +107,29 @@ document.addEventListener("DOMContentLoaded", async () => {
       customAlert.style.display = "none";
     });
 
+    // Handle word count validation
+    const validateWordCount = () => {
+      const wordCount = messageInput.value.trim().split(/\s+/).filter(word => word).length;
+      if (wordCount < 5 || wordCount > 10) {
+        wordWarning.style.display = 'block';
+        return false;
+      } else {
+        wordWarning.style.display = 'none';
+        return true;
+      }
+    };
+
+    // Add input event listener to check word count
+    messageInput.addEventListener('input', validateWordCount);
+
     // Handle form submission
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      if (!validateWordCount()) {
+        showCustomAlert("Feedback must be between 5 and 10 words.");
+        return;
+      }
 
       const clientData = {
         name: nameInput.value,
@@ -115,7 +148,6 @@ document.addEventListener("DOMContentLoaded", async () => {
               count: currentCount + 1
             });
           } else {
-           
             await setDoc(viewDocRef, { count: 1 });
           }
         } catch (error) {
@@ -124,7 +156,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Add client feedback to Firestore
         await addDoc(collection(db, "clientFeedback"), clientData);
-        showCustomAlert("Feedback submitted successfully!");
+        showCustomAlert("Thank you Sheila!!");
         form.reset();
       } catch (error) {
         console.error("Error submitting feedback: ", error);
