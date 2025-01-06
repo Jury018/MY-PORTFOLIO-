@@ -1,21 +1,21 @@
+// Import modules
 import { skillFunctionality } from "./skills.js";
 import { topNav } from "./topnav.js";
 import { animation } from "./animation.js";
+import { db, collection, addDoc, viewDocRef, getDoc, updateDoc, setDoc } from './firebase.js';
 
-
+// Initialize imported modules
 topNav();
 skillFunctionality();
 animation();
 
-
+// Add copyright dynamically
 const copyright = `&copy;${new Date().getFullYear()} BONFIRE. All rights reserved`;
 document.querySelector('footer p').innerHTML = copyright;
 
-
-//FIREBASE SETUP WITH CSS STYLE
-import { db, collection, addDoc, viewDocRef, getDoc, updateDoc } from './firebase.js';
-
+// DOMContentLoaded Event
 document.addEventListener("DOMContentLoaded", async () => {
+  // Add CSS styles dynamically
   const style = document.createElement("style");
   style.innerHTML = `
     .custom-alert {
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   `;
   document.head.appendChild(style);
 
-  // Create modal structure dynamically
+  // Create and append the custom alert modal
   const customAlert = document.createElement("div");
   customAlert.id = "customAlert";
   customAlert.className = "custom-alert";
@@ -78,7 +78,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   `;
   document.body.appendChild(customAlert);
 
-  // Get form elements
+  // Close alert functionality
+  const closeAlert = document.querySelector("#closeAlert");
+  closeAlert.addEventListener("click", () => {
+    customAlert.style.display = "none";
+  });
+
+  // Form validation and submission
   const form = document.querySelector("#contactForm");
 
   if (form) {
@@ -86,32 +92,31 @@ document.addEventListener("DOMContentLoaded", async () => {
     const emailInput = form.querySelector('#email');
     const messageInput = form.querySelector('#message');
 
-    // Add a word limit warning message
+    // Add word limit warning
     const wordWarning = document.createElement('p');
     wordWarning.className = 'word-warning';
-    wordWarning.textContent = 'Feedback must be between 5 and 10 words.';
+    wordWarning.textContent = 'Feedback must be between 5 and 500 words.';
     messageInput.parentNode.appendChild(wordWarning);
 
-    // Get modal elements
-    const alertMessage = document.querySelector("#alertMessage");
-    const closeAlert = document.querySelector("#closeAlert");
+    // Add live word count display
+    const wordCountDisplay = document.createElement('p');
+    wordCountDisplay.id = 'wordCountDisplay';
+    wordCountDisplay.style.color = 'gray';
+    wordCountDisplay.textContent = 'Word count: 0';
+    messageInput.parentNode.appendChild(wordCountDisplay);
 
-    // Function to display the custom alert
-    const showCustomAlert = (message) => {
-      alertMessage.textContent = message;
-      customAlert.style.display = "flex";
-    };
-
-    // Close the custom alert when the close button is clicked
-    closeAlert.addEventListener("click", () => {
-      customAlert.style.display = "none";
-    });
-
-    // Handle word count validation
-    const validateWordCount = () => {
+    // Handle word count validation and live count display
+    const updateWordCount = () => {
       const wordCount = messageInput.value.trim().split(/\s+/).filter(word => word).length;
-      if (wordCount < 5 || wordCount > 10) {
+      wordCountDisplay.textContent = `Word count: ${wordCount}`;
+
+      if (wordCount < 10) {
         wordWarning.style.display = 'block';
+        wordWarning.textContent = 'Feedback must be at least 10 words.';
+        return false;
+      } else if (wordCount > 500) {
+        wordWarning.style.display = 'block';
+        wordWarning.textContent = 'Feedback has reached the maximum limit of 500 words.';
         return false;
       } else {
         wordWarning.style.display = 'none';
@@ -119,51 +124,52 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     };
 
-    // Add input event listener to check word count
-    messageInput.addEventListener('input', validateWordCount);
+    // Attach input event listener for live word count
+    messageInput.addEventListener('input', updateWordCount);
 
-    // Handle form submission
+    // Form submit event
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      if (!validateWordCount()) {
-        showCustomAlert("Feedback must be between 5 and 10 words.");
-        return;
-      }
+      // Validate word count
+      if (!updateWordCount()) return;
 
+      // Collect form data
       const clientData = {
-        name: nameInput.value,
-        email: emailInput.value,
-        message: messageInput.value,
-        timestamp: new Date(),
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        message: messageInput.value.trim(),
       };
 
       try {
-        // Track page view count in Firestore
-        try {
-          const viewSnapshot = await getDoc(viewDocRef);
-          if (viewSnapshot.exists()) {
-            const currentCount = viewSnapshot.data().count || 0;
-            await updateDoc(viewDocRef, {
-              count: currentCount + 1
-            });
-          } else {
-            await setDoc(viewDocRef, { count: 1 });
-          }
-        } catch (error) {
-          console.error("Error tracking views: ", error);
+        // Track page views in Firestore
+        const viewSnapshot = await getDoc(viewDocRef);
+        if (viewSnapshot.exists()) {
+          const currentCount = viewSnapshot.data().count || 0;
+          await updateDoc(viewDocRef, { count: currentCount + 1 });
+        } else {
+          await setDoc(viewDocRef, { count: 1 });
         }
 
         // Add client feedback to Firestore
         await addDoc(collection(db, "clientFeedback"), clientData);
-        showCustomAlert("Thank you sa feedback kupal.");
+
+        // Show success alert
+        const showCustomAlert = (message) => {
+          const alertMessage = document.querySelector("#alertMessage");
+          alertMessage.textContent = message;
+          customAlert.style.display = "flex";
+        };
+
+        showCustomAlert("Feedback submitted successfully!");
         form.reset();
+        wordCountDisplay.textContent = 'Word count: 0'; // Reset word count
       } catch (error) {
-        console.error("Error submitting feedback. Hays bug na naman.", error);
-        showCustomAlert("Failed to submit feedback. Ayusin mo! ");
+        console.error("Error submitting feedback: ", error);
+        showCustomAlert("Failed to submit feedback. Please try again.");
       }
     });
   } else {
-    console.error('Form not found!');
+    console.error("Form not found!");
   }
 });
