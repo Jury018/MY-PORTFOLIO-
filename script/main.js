@@ -156,11 +156,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Add client feedback to Firestore
         await addDoc(collection(db, "clientFeedback"), clientData);
-        showCustomAlert("Thank you Sheila!!");
+        showCustomAlert("Thank you sa feedback kupal.");
         form.reset();
       } catch (error) {
-        console.error("Error submitting feedback: ", error);
-        showCustomAlert("Failed to submit feedback. Please try again.");
+        console.error("Error submitting feedback. Hays bug na naman.", error);
+        showCustomAlert("Failed to submit feedback. Ayusin mo! ");
       }
     });
   } else {
