@@ -1,7 +1,8 @@
-export function skillFunctionality(){
+ export function skillFunctionality(){
+
 
   const skills = [
-    //--------add skill here--------//
+    
     {
       icon:'images/icon/html.png',
       name: 'HTML',
