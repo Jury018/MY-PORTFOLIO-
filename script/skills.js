@@ -3,47 +3,47 @@ export function skillFunctionality(){
   const skills = [
     //--------add skill here--------//
     {
-      icon:'images/icons/html.png',
+      icon:'images/icon/html.png',
       name: 'HTML',
       type: 'tech-stack'
     },
     {
-      icon:'images/icons/CSS.png',
+      icon:'images/icon/CSS.png',
       name: 'CSS',
       type: 'tech-stack'
     },
     {
-      icon:'images/icons/js (1).png',
+      icon:'images/icon/js (1).png',
       name: 'JAVASCRIPT',
       type: 'tech-stack'
     },
     {
-      icon:'images/icons/java-1.png',
+      icon:'images/icon/java-1.png',
       name: 'JAVA',
       type: 'tech-stack'
     },
     {
-      icon:'images/icons/python.png',
+      icon:'images/icon/python.png',
       name: 'PYTHON',
       type: 'tech-stack'
     },
     {
-      icon:'images/icons/acode.png',
+      icon:'images/icon/acode.png',
       name: 'A CODE',
       type: 'tool'
     },
     {
-      icon:'images/icons/jvdroid.png',
+      icon:'images/icon/jvdroid.png',
       name: 'JVDROID',
       type: 'tool'
     },
     {
-      icon:'images/icons/github (2).png',
+      icon:'images/icon/github (2).png',
       name: 'GITHUB',
       type: 'tool'
     },
     {
-      icon:'images/icons/trebedit.png',
+      icon:'images/icon/trebedit.png',
       name: 'TREBEDIT',
       type: 'tool'
     }
