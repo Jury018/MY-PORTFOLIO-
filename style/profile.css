@@ -1,28 +1,47 @@
-.profile-container{
+.profile-container {
   padding: 2.3rem 10%;
   border-radius: 16px;
   background-color: var(--primary-color);
   text-align: center;
   margin-bottom: 7rem;
-  animation: profile-entry 1.5s forwards ease;
+  animation: profile-entry 1.5s ease forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s ease-in-out; /* Add hover effect to the entire card */
 }
 
-.profile-container .profile-pic{
+.profile-container:hover {
+  transform: translateY(-5px); /* Slightly lift the card on hover */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Increase shadow on hover */
+}
+
+.profile-container .profile-pic {
   border-radius: 16px;
   margin-bottom: 1.5rem;
   max-width: 26rem;
+  object-fit: cover;
+  transition: transform 0.2s ease-in-out; /* Add hover effect to the image */
 }
 
-.profile-container .name{
+.profile-container .profile-pic:hover {
+  transform: scale(1.05); /* Slightly enlarge the image on hover */
+}
 
+.profile-container .name {
   color: var(--neutral-color);
-  font-size: 2.50rem;
+  font-size: 2.5rem;
   line-height: 1em;
   margin-bottom: 1rem;
   animation: name-entry 1.8s ease;
+  transition: color 0.2s ease-in-out; /* Change text color on hover */
 }
 
-.profile-container .short-about-me{
+.profile-container .name:hover {
+  color: var(--accent-color); /* Adjust accent-color as needed */
+}
+
+.profile-container .short-about-me {
   color: var(--pastel-color);
   font-size: 18px;
   font-weight: 600;
@@ -30,25 +49,39 @@
   margin-bottom: 2rem;
   line-height: 1.2em;
   animation: profile-about-entry 1.6s ease;
+  max-width: 30rem;
+  transition: opacity 0.2s ease-in-out; /* Fade in/out on hover */
 }
 
-.profile-container .social-media-nav ul{
+.profile-container .short-about-me:hover {
+  opacity: 1; /* Fully visible on hover */
+}
+
+.profile-container .social-media-nav ul {
   list-style: none;
   display: flex;
   justify-content: center;
   gap: 1.5rem;
 }
 
-.profile-container .social-media-nav ul li a img{
+.profile-container .social-media-nav ul li a img {
   max-width: 1.5rem;
+  transition: transform 0.2s ease-in-out;
 }
 
-@media(width >= 1000px){
-  .profile-container.fixed{
-   position: sticky;
-   top: 5.3rem;
-   max-height: 35rem;
-   width: 50rem;
-   padding: 2.3rem 1.6rem;
-   }
- }
+.profile-container .social-media-nav ul li a img:hover {
+  transform: scale(1.1); 
+}
+
+@media (width >= 1000px) {
+  .profile-container.fixed {
+    position: sticky;
+    top: 5.3rem;
+    max-height: 35rem;
+    width: 50rem;
+    padding: 2.3rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
