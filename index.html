@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="path/to/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/favicon.ico" type="image/png">
+    <!-- Firebase SDK -->
+<script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"></script>
+<script type="module" src="script/firebase.js"></script>
+<script type="module" src="script/main.js"></script>
+<script src="script/certificate.js"></script>
+
+    <link rel="stylesheet" href="style/animation.css">  
+    <link rel="stylesheet" href="style/global.css">
+    <link rel="stylesheet" href="style/top_nav.css">
+    <link rel="stylesheet" href="style/profile.css">
+    <link rel="stylesheet" href="style/about.css">
+    <link rel="stylesheet" href="style/skills.css">
+    <link rel="stylesheet" href="style/contact.css">
+    <link rel="stylesheet" href="style/projects.css">
+    <link rel="stylesheet" href="style/certificate.css">
+    <link rel="stylesheet" href="style/footer.css">
+    <link rel="stylesheet" href="style/cv.css">
+    <title>PERSONAL PORTFOLIO</title>
+  </head>
+  <body>
+    <div class="main-wrapper">
+     <!-- TOP-NAVIGATION -->
+<nav class="top-nav">
+  <ul>
+    <li class="nav home">
+      <a href=""><p>Home</p> <img class="nav-icon" src="images/icons/home-icon.png" alt=""></a>
+    </li>
+    <li class="nav about">
+      <a href="#about-section"><p>About</p> <img class="nav-icon" src="images/icons/about-icon.png" alt=""></a>
+    </li>
+    <li class="nav skills">
+      <a href="#skills-section"><p>Skills</p> <img class="nav-icon" src="images/icons/skill-icon.png" alt=""></a>
+    </li>
+    <li class="nav projects">
+      <a href="#projects-section"><p>Projects</p> <img class="nav-icon" src="images/icons/projects-icon.png" alt=""></a>
+    </li>
+    <li class="nav certification">
+      <a href="#certificates-section"><p>Certification</p> <img class="nav-icon" src="images/icons/certificate-icon.png" alt=""></a>
+    </li>
+  </ul>
+  <a href="#contact-section" id="let-connect-btn">Let's Connect</a>
+</nav>
+          
+      <main>
+        <!-- PROFILE CARD -->
+        <div class="profile-container fixed">
+  <img src="images/mypic1.png" alt="" class="profile-pic">
+  <h3 class="name">Bon Jury Pecaoco </h3>
+  <p class="short-about-me">"BONFIRE"</p>
+
+  <nav class="social-media-nav">
+    <ul>
+      <li>
+        <a href="https://www.instagram.com/jury_dgaf/profilecard/?igsh=aGpqMHV2ejY4ZW5u" target="_blank"> 
+          <img src="images/icons/instagram.png" alt="insta-icon">
+        </a>
+      </li>
+      <li>
+        <a href="https://x.com/jury_bon?t=iIKg5DIT1jStj3_l3-cNDg&s=09" target="_blank"> 
+          <img src="images/icons/twitter.png" alt="twitter-icon">
+        </a>
+      </li>
+      <li>
+        <a href="https://www.tiktok.com/@jury_dgaf?_t=ZS-8so3jcZcW6K&_r=1" target="_blank"> 
+          <img src="images/icons/tiktok.png" alt="twitter-icon">
+        </a>
+      </li>
+      <li>
+        <a href="https://www.facebook.com/bon.jury.pecaoco.2024?mibextid=ZbWKwL" target="_blank"> 
+          <img src="images/icons/facebook.png" alt="fb-icon">
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+         <!-- CV Download Button -->
+    <a href="https://www.canva.com/design/DAGT1o-qlb4/igd8FxJuhlCJGLIPxKp2lQ/edit?utm_content=DAGT1o-qlb4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="download-cv-btn" target="_blank">View my CV</a>
+
+        <div class="section-container">
+          <!-- ABOUT SECTION -->
+          <section id="about-section" class="section about">
+            <h1 class="heading">FRONTEND<br><span>DEVELOPER</span></br></h1>
+            <p class="more-about-me">
+              As a passionate frontend developer, I'm dedicated to crafting visually stunning and user-friendly websites. With a strong foundation in HTML, CSS, and JavaScript, I've honed my skills to create dynamic and interactive web experiences. I'm excited to expand my knowledge into backend development to deliver full-stack solutions. I'm always eager to learn and grow, embracing challenges as opportunities to innovate and improve.</p>
+  
+            <div class="years-of-doing d-grid">
+              <div class="experience">
+                <h3 class="years">+2</h3>
+                <p>YEARS OF <br>EXPERIENCE</br></p>
+              </div>
+              <div class="projects">
+                <h3 class="years">+5</h3>
+                <p> PROJECTS <br> COMPLETED</br></p>
+              </div>
+              <div class="clients">
+                <h3 class="years">+2</h3>
+                <p>LOCAL <br>CLIENTS</br></p>
+              </div>   
+            </div>
+          </section>
+          
+          <!-- SKILL SECTION -->
+          <section id="skills-section" class="section skills">
+            <h1 class="heading"> SPECIALIZED <br><span>SKILLS</span></br></h1>
+            <button class="tech-stacks-btn selected">TECH STACK</button>
+            <button class="tools-btn">TOOLS</button>
+  
+            <div class="skills-container tech-stack-skills d-grid">
+              <!-- add and delete skills on skills.js -->
+            </div>
+            <div class="skills-container tools-skills d-grid">
+                
+            </div>
+          </section>
+  
+          <!-- PROJECT SECTION -->
+          <section id="projects-section" class="section project">
+  <h1 class="heading"> RECENT<br><span>PROJECTS</span></h1>
+  <div class="projects-container">
+    <!-- 1 -->
+    <a href="https://jury018.github.io/BON-JOUR-RESTO-/" target="_blank" class="project-link">
+      <div class="project-card">
+        <img src="images/icons/project1.jpg" alt="project-icon" class="project-icon">
+        <div class="title-description-container">
+          <h4 class="project-title">BON JOUR PINOY RESTO</h4>
+          <p class="project-description">-First full stack restaurant website project with backend.</p>
+          <p class="project-description">-3-4 months creation</p>
+        </div> 
+        <img class="arrow-icon" src="images/icons/up-right-arrow.png" alt="arrow-icon">
+      </div>
+    </a>
+    <!-- 2 -->
+    <a href="https://jury018.github.io/ROCK-PAPER-SCISSORS-GAME/" target="_blank" class="project-link">
+      <div class="project-card">
+        <img src="images/icons/project2.jpg" alt="project-icon" class="project-icon">
+        <div class="title-description-container">
+          <h4 class="project-title">THE HANDS OF FATE</h4>
+          <p class="project-description">-A rock, scissors, paper game with 2 modes.</p>
+          <p class="project-description">-7 days creation upon deployment. Still has ongoing updates.</p>
+        </div> 
+        <img class="arrow-icon" src="images/icons/up-right-arrow.png" alt="arrow-icon">
+      </div>
+    </a>
+    <!-- 3 -->
+    <a href="https://jury018.github.io/STORY-OF-MY-LIFE-ALBUM/" target="_blank" class="project-link">
+      <div class="project-card">
+        <img src="images/icons/project4.jpg" alt="project-icon" class="project-icon">
+        <div class="title-description-container">
+          <h4 class="project-title">PHOTO ALBUM</h4>
+          <p class="project-description">-Images contains owner and peers' pictures</p>
+          <p class="project-description">-Rework. Still has ongoing updates</p>
+        </div> 
+        <img class="arrow-icon" src="images/icons/up-right-arrow.png" alt="arrow-icon">
+      </div>
+    </a>
+    <!-- 4 -->
+    <a href="https://jury018.github.io/FLOWERS-FOR-YOU/" target="_blank" class="project-link">
+      <div class="project-card">
+        <img src="images/icons/project3.jpg" alt="project-icon" class="project-icon">
+        <div class="title-description-container">
+          <h4 class="project-title">ROSE LAMP</h4>
+          <p class="project-description">-Inspired by the music lyrics "About You" by The 1975.</p>
+          <p class="project-description">-First music lyrics project, 14 days creation time</p>
+        </div> 
+        <img class="arrow-icon" src="images/icons/up-right-arrow.png" alt="arrow-icon">
+      </div>
+    </a>
+    <!-- 5 -->
+    <a href="https://jury018.github.io/Sunrise-ft.-billie-eilish-/" target="_blank" class="project-link">
+      <div class="project-card">
+        <img src="images/icons/project5.jpg" alt="project-icon" class="project-icon">
+        <div class="title-description-container">
+          <h4 class="project-title">SUNSET BY THE BAY</h4>
+          <p class="project-description">-Advanced music lyrics "Birds of a Feather" by Billie Eilish, powered by JavaScript.</p>
+          <p class="project-description">-4 days creation time</p>
+        </div> 
+        <img class="arrow-icon" src="images/icons/up-right-arrow.png" alt="arrow-icon">
+      </div>
+    </a>
+  </div>
+</section>
+
+        <!-- CERTIFICATES SECTION -->
+<section id="certificates-section" class="section certificate">
+  <h1 class="heading">CERTIFICATES<br><span>ACHIEVEMENTS</span></h1>
+  <div class="certificates-container">
+    <!-- Certificate 1 -->
+    <div class="certificate-card">
+      <img src="images/icons/certificate1.png" alt="HTML course" class="certificate-icon" loading="lazy" onclick="openLightbox(this)">
+      <div class="title-description-container">
+        <h4 class="certificate-title">HTML CERTIFICATION</h4>
+        <p class="certificate-description">- A full course and tutorials certification from Sololearn. </p>
+        <p class="certificate-description">- Completion Date: March 2024</p>
+      </div>
+    </div>
+    <!-- Certificate 2 -->
+    <div class="certificate-card">
+      <img src="images/icons/certificate2.png" alt="Coding for Data Course" class="certificate-icon" loading="lazy" onclick="openLightbox(this)">
+      <div class="title-description-container">
+        <h4 class="certificate-title">CODING FOR DATA COURSE</h4>
+        <p class="certificate-description">-A full tutorials and course learned from python.</p>
+        <p class="certificate-description">- Completion Date: March 2024</p>
+      </div>
+    </div>
+    <!-- Certificate 3 -->
+    <div class="certificate-card">
+      <img src="images/icons/soon.png" alt="UI/UX Design Workshop" class="certificate-icon" loading="lazy" onclick="openLightbox(this)">
+      <div class="title-description-container">
+        <h4 class="certificate-title">JAVA NCIII PROGRAMMING CERTIFICATION</h4>
+        <p class="certificate-description">Licensed & Certified TESDA certification holder</p>
+        <p class="certificate-description">- Completion Date: Ongoing</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+ <section> <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightbox-btn prev" onclick="navigateLightbox(-1)">❮</button>
+    <img id="lightbox-image" class="lightbox-image" alt="certificate">
+    <button class="lightbox-btn next" onclick="navigateLightbox(1)">❯</button>
+    <span class="lightbox-close" onclick="closeLightbox()">×</span>
+  </div>
+</section>
+      
+         <!-- CONTACT SECTION -->
+<section id="contact-section">
+  <h1 class="heading">LET'S WORK<br><span>TOGETHER</span></br></h1>
+  <form id="contactForm">  
+    <div class="input-container">
+      <input type="text" class="input" id="name" placeholder="Your Name" required>
+      <input type="email" class="input" id="email" placeholder="Your@email.com" required>
+    </div>    
+    <textarea id="message" class="input" placeholder="Message to me" required></textarea>
+    <button class="submit-btn">Submit</button>
+  </form>
+</section>
+        </div>
+      </main>
+      <footer>
+       
+        <p>Visit him on</p>
+        <nav class="socmed-nav">
+          <nav>
+            <ul>
+              <li>
+                <a href="https://www.facebook.com/bon.jury.pecaoco.2024?mibextid=ZbWKwL"><img src="images/icons/facebook.png" alt="fb-icon" class="socmed-icon"></a>
+              </li>
+              <li>
+                <a href="https://www.tiktok.com/@jury_dgaf?_t=ZS-8so27sGimF6&_r=1"><img src="images/icons/tiktok.png" alt="tiktok-icon" class="socmed-icon"></a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/jury_dgaf/profilecard/?igsh=aGpqMHV2ejY4ZW5u"><img src="images/icons/instagram.png" alt="insta-icon" class="socmed-icon"></a>
+              </li>
+            </ul>
+          </nav>
+        </nav>
+      </footer>      
+    </div>    
+  </body>
+</html>
