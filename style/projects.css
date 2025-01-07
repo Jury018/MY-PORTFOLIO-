@@ -1,3 +1,4 @@
+/* PROJECT SECTION STYLING */
 #projects-section .heading {
   margin-bottom: 2rem;
 }
@@ -14,35 +15,35 @@
   transition: 0.4s;
   opacity: 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff10; 
+  background-color: #ffffff10;
 }
 
 #projects-section .projects-container .project-card:hover {
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-  transform: translateY(-5px); 
+  transform: translateY(-5px);
   background: linear-gradient(135deg, rgba(255, 0, 150, 0.1), rgba(0, 150, 255, 0.1));
 }
 
-.project-card .project-icon {
+#projects-section .projects-container .project-card .project-icon {
   width: clamp(5rem, 15vw, 10rem);
 }
 
-.project-card .project-title {
-  font-size: calc(var(--medium-Fsize) + 2px); 
+#projects-section .projects-container .project-card .project-title {
+  font-size: calc(var(--medium-Fsize) + 2px);
   font-weight: bold;
   color: var(--primary-color-light);
   line-height: 1.2em;
   margin-bottom: 0.5rem;
 }
 
-.project-card .project-description {
+#projects-section .projects-container .project-card .project-description {
   font-size: calc(var(--XS-Fsize) + 1px);
   color: var(--primary-color);
   line-height: 1.5;
-  opacity: 0.8; /* Slightly darker for better readability */
+  opacity: 0.8;
 }
 
-.project-card .arrow-icon {
+#projects-section .projects-container .project-card .arrow-icon {
   position: absolute;
   max-width: 0.9rem;
   right: 20px;
@@ -51,10 +52,10 @@
 }
 
 #projects-section .projects-container .project-card:hover > .arrow-icon {
-  transform: translate(-5px, -5px) scale(1.2) rotate(45deg); /* Dynamic hover effect */
+  transform: translate(-5px, -5px) scale(1.2) rotate(45deg);
 }
 
-/* Entry animation for project cards */
+/* ENTRY ANIMATION FOR PROJECT CARDS */
 @keyframes cards-entry {
   0% {
     opacity: 0;
@@ -71,35 +72,135 @@
   animation-delay: var(--animation-delay, 0s); /* Staggered effect */
 }
 
-/* Project Link Styling */
-.project-link {
+/* PROJECT LINK STYLING */
+#projects-section .project-link {
   text-decoration: none;
   display: block;
   color: inherit;
 }
 
-.project-link:hover .project-card {
+#projects-section .project-link:hover .project-card {
   background-color: rgba(0, 0, 0, 0.2); /* Optional hover effect */
 }
 
-/* Responsive Design */
+/* RESPONSIVE DESIGN FOR PROJECT SECTION */
 @media (max-width: 768px) {
   #projects-section .projects-container {
     flex-direction: column; /* Stack cards vertically */
   }
 
-  .project-card {
+  #projects-section .project-card {
     padding: 1rem;
     flex-direction: column;
     text-align: center;
   }
 
-  .project-card .project-icon {
+  #projects-section .project-card .project-icon {
     width: clamp(4rem, 12vw, 8rem);
   }
 
-  .project-card .arrow-icon {
+  #projects-section .project-card .arrow-icon {
     position: static; /* Adjust for stacked layout */
     margin-top: 0.5rem;
+  }
+}
+
+/* ROUND PROGRESS BAR STYLING */
+#projects-section .progress-container {
+  position: absolute;
+  top: 20px; /* Positioned at the top left for visibility */
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#projects-section .progress-bar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(#f44336 0%, rgba(0, 0, 0, 0.1) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, background 0.3s ease; /* Smooth transition */
+}
+
+#projects-section .progress-text {
+  position: absolute;
+  font-size: 14px;
+  color: #fff;
+  font-weight: bold;
+  z-index: 3;
+  letter-spacing: 0.5px;
+  transition: opacity 0.3s ease;
+}
+
+/* Progress Animation */
+@keyframes progress-fill {
+  0% {
+    background: conic-gradient(#f44336 0%, rgba(0, 0, 0, 0.1) 100%);
+  }
+  100% {
+    background: conic-gradient(#f44336 var(--progress-angle), rgba(0, 0, 0, 0.1) var(--progress-angle));
+  }
+}
+
+/* Apply the animation to the progress bar */
+.progress-bar.animate {
+  animation: progress-fill 1.5s ease-out forwards;
+}
+
+/* Hover Effects */
+#projects-section .progress-container:hover {
+  transform: scale(1.1); /* Slight zoom effect */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+#projects-section .progress-container:hover .progress-bar {
+  background: conic-gradient(#f44336 0%, rgba(0, 0, 0, 0.2) 100%); /* Slight darkening on hover */
+}
+
+#projects-section .progress-container:hover .progress-text {
+  opacity: 0.8; /* Slight text opacity effect */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #projects-section .progress-container {
+    width: 40px;
+    height: 40px;
+    top: 15px;
+    left: 15px;
+  }
+
+  #projects-section .progress-text {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #projects-section .progress-container {
+    width: 60px;
+    height: 60px;
+    top: 20px;
+    left: 20px;
+  }
+
+  #projects-section .progress-text {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #projects-section .project-card {
+    padding-top: 60px; /* Ensure space between card and progress bar */
   }
 }
