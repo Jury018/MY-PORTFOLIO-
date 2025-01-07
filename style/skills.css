@@ -1,35 +1,45 @@
-#skills-section .heading{
+#skills-section .heading {
   margin-bottom: 2rem;
 }
-#skills-section button{
+
+#skills-section button {
   color: var(--primary-color);
   opacity: 0.8;
   padding: 0.3rem 0.5rem;
-  font-size: calc(var(--XS-Fsize) - 0.3rem) ;
+  font-size: calc(var(--XS-Fsize) - 0.3rem);
   border-radius: 5px;
-  border: none;
+  border: 2px solid transparent;
   background-color: transparent;
   margin-bottom: 1.1rem;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
-#skills-section button.selected{
+
+#skills-section button.selected {
   opacity: 1;
   color: var(--accent-color);
   background-color: #00acb534;
-  font-size:calc(var(--XS-Fsize) - 0.2rem);
+  font-size: calc(var(--XS-Fsize) - 0.2rem);
+  border-color: var(--accent-color);
 }
 
-#skills-section .skills-container.d-grid{
+#skills-section button:hover {
+  border-color: var(--accent-color);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#skills-section .skills-container.d-grid {
   display: grid;
   grid-template-columns: 50% 50%;
-  gap: 10px
+  gap: 10px;
 }
 
-#skills-section .skills-container.tools-skills{
+#skills-section .skills-container.tools-skills {
   display: none;
 }
 
-#skills-section .skills-container .skill{
+#skills-section .skills-container .skill {
   font-size: var(--XS-small-Fsize);
   display: flex;
   gap: 0.5rem;
@@ -38,28 +48,61 @@
   border: 1px solid var(--accent-color);
   border-radius: 5px;
   padding: 0.7rem;
-  transition: 0.2s;
+  transition: 0.3s ease;
   cursor: pointer;
   opacity: 0;
 }
 
-
-#skills-section .skills-container .skill .icon{
+#skills-section .skills-container .skill .icon {
   max-width: 1.5rem;
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-#skills-section .skills-container .skill p{
+#skills-section .skills-container .skill p {
   font-size: var(--XS-Fsize);
   color: var(--primary-color);
   text-align: center;
 }
 
-#skills-section .skills-container .skill:hover{
-  background-color:#00acb577;
+#skills-section .skills-container .skill:hover {
+  background-color: var(--accent-color);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-@media(width >= 550px){
-  #skills-section .skills-container.d-grid{
-    grid-template-columns: repeat(3, 33%);
+#skills-section .skills-container .skill .icon:hover {
+  filter: brightness(1.3);
+  transform: rotate(15deg) scale(1.2);
+}
+
+#skills-section .skills-container .progress-bar {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  margin-top: 0.5rem;
+  height: 5px;
+}
+
+#skills-section .skills-container .progress {
+  height: 100%;
+  background-color: var(--accent-color);
+  border-radius: 5px;
+}
+
+#skills-section .skills-container .percentage {
+  font-size: var(--XS-Fsize);
+  color: var(--primary-color);
+  text-align: center;
+  margin-top: 0.3rem;
+}
+
+@media (max-width: 550px) {
+  #skills-section .skills-container.d-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #skills-section button {
+    width: 100%;
+    margin-bottom: 1rem;
   }
 }
