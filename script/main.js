@@ -13,6 +13,19 @@ animation();
 const copyright = `&copy;${new Date().getFullYear()} BONFIRE. All rights reserved`;
 document.querySelector('footer p').innerHTML = copyright;
 
+//MAINTENANCE MECHANISM 
+  // Check if maintenance.txt exists (you'll need to manually add this to trigger maintenance)
+  fetch('/maintenance.txt')
+    .then(response => {
+      if (response.ok) {
+        // If the file exists, redirect to the custom 404 page when maintenance is active
+        window.location.href = '/404.html';
+      }
+    })
+    .catch(error => {
+      // If the file is not found (i.e., not in maintenance mode), do nothing and allow normal page access
+    });
+    
 // DOMContentLoaded Event
 document.addEventListener("DOMContentLoaded", async () => {
   // Add CSS styles dynamically
