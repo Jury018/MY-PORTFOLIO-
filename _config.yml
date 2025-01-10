@@ -1,3 +1,0 @@
-# _config.yml
-theme: jekyll-theme-minimal  # Add a theme if necessary (optional)
-permalink: /:year/:month/:day/:title/
