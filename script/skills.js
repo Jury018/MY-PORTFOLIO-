@@ -11,19 +11,19 @@ export function skillFunctionality() {
       icon: 'images/icon/CSS.png',
       name: 'CSS',
       type: 'tech-stack',
-      progress: 70
+      progress: 60
     },
     {
       icon: 'images/icon/js (1).png',
       name: 'JAVASCRIPT',
       type: 'tech-stack',
-      progress: 85
+      progress: 65
     },
     {
       icon: 'images/icon/java-1.png',
       name: 'JAVA',
       type: 'tech-stack',
-      progress: 40
+      progress: 70
     },
     {
       icon: 'images/icon/python.png',
