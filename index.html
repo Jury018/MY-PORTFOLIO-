@@ -40,22 +40,19 @@
 
 <script>
   function scrollToTopAndReload() {
-    // Add a visual cue (optional)
     document.querySelector('.nav.home').classList.add('active'); 
 
     window.scrollTo({ top: 0, behavior: 'smooth' }); 
 
-    // Simulate page reload (replace with actual reload logic)
     setTimeout(() => {
       document.querySelector('.nav.home').classList.remove('active'); 
-      // location.reload(true); 
     }, 500); 
   }
 </script>
 
 <style>
   .nav.home.active {
-    background-color: lightgray; /* Example: Highlight the button */
+    background-color: lightgray; 
   }
 </style>
 
