@@ -54,7 +54,14 @@ export function skillFunctionality() {
       name: 'TREBEDIT',
       type: 'tool',
       progress: 95
+    },
+    {
+      icon: 'images/icon/codestudio.png',
+      name: 'CODE STUDIO',
+      type: 'tool',
+      progress: 65
     }
+   
   ];
 
   let techstacksHTML = '';
