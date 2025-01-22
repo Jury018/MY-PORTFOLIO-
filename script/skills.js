@@ -23,7 +23,7 @@ export function skillFunctionality() {
       icon: 'images/icon/java-1.png',
       name: 'JAVA',
       type: 'tech-stack',
-      progress: 70
+      progress: 99
     },
     {
       icon: 'images/icon/python.png',
