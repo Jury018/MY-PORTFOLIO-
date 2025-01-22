@@ -61,7 +61,6 @@ export function skillFunctionality() {
       type: 'tool',
       progress: 65
     }
-   
   ];
 
   let techstacksHTML = '';
