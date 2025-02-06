@@ -29,8 +29,14 @@ export function skillFunctionality() {
       icon: 'images/icon/python.png',
       name: 'PYTHON',
       type: 'tech-stack',
-      progress: 40
+      progress: 30
     },
+    {
+      icon: 'images/icon/Csharp.png',
+      name: 'C#',
+      type: 'tech-stack',
+      progress: 10
+    }, 
     {
       icon: 'images/icon/acode.png',
       name: 'A CODE',
@@ -60,6 +66,12 @@ export function skillFunctionality() {
       name: 'CODE STUDIO',
       type: 'tool',
       progress: 65
+    },
+    {
+      icon: 'images/icon/vstudio.png',
+      name: 'VISUAL STUDIO',
+      type: 'tool',
+      progress: 20
     }
   ];
 
