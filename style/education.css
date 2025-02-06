@@ -1,0 +1,180 @@
+/* EDUCATION SECTION STYLING */
+#education-section {
+  padding: 4rem 2rem;
+  background-color: var(--secondary-background);
+}
+
+/* Heading */
+#education-section .heading {
+  margin-bottom: 2rem;
+}
+
+/* Education Container */
+.education-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+}
+
+/* Education Card */
+.education-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border-radius: 16px;
+  background-color: #ffffff10;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s, box-shadow 0.4s, background-color 0.3s;
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards;
+}
+
+/* Hover Effects */
+.education-item:hover {
+  box-shadow: 0 12px 20px rgba(255, 0, 150, 0.2), 0 4px 6px rgba(0, 150, 255, 0.2);
+  transform: translateY(-8px) scale(1.02);
+  background: linear-gradient(135deg, rgba(255, 0, 150, 0.1), rgba(0, 150, 255, 0.1));
+}
+
+/* Degree Title */
+.degree {
+  background: linear-gradient(to right, #ff007f, #ff152a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: calc(var(--medium-Fsize) + 4px);
+}
+
+.degree a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+/* Underline Effect on Hover */
+.degree:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--primary-color-light);
+}
+
+/* Institution Name */
+.institution {
+  font-size: calc(var(--XS-Fsize) + 3px);
+  color: var(--primary-color);
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+/* Duration */
+.duration {
+  font-size: calc(var(--XS-Fsize) + 2px);
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+/* Description */
+.description {
+  font-size: calc(var(--XS-Fsize) + 1px);
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+}
+
+/* Entry Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Delayed Animation for Each Card */
+.education-item:nth-child(1) { animation-delay: 0.2s; }
+.education-item:nth-child(2) { animation-delay: 0.4s; }
+.education-item:nth-child(3) { animation-delay: 0.6s; }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .education-container {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .education-item {
+    padding: 1.2rem;
+  }
+
+  .degree {
+    font-size: 1.3rem;
+  }
+
+  .institution,
+  .duration,
+  .description {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .education-container {
+    gap: 1rem;
+  }
+  .education-item {
+    padding: 1rem;
+  }
+  .school-logo {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 400px) {
+  .degree {
+    font-size: 1rem;
+  }
+
+  .institution,
+  .duration,
+  .description {
+    font-size: 0.85rem;
+  }
+}
+
+/* School Logo - Rounded & Styled */
+.school-logo {
+  width: 80px; 
+  height: 80px; 
+  object-fit: cover; 
+  border-radius: 100%; 
+  border: 3px solid var(--primary-color-light); 
+  background-color: transparent; 
+  padding: 5px; 
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.education-item:hover .school-logo {
+  transform: scale(1.1);
+}
+
+
+.school-logo:active {
+  transform: scale(0.9); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+@keyframes bounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.8); }
+  100% { transform: scale(1); }
+}
+
+.school-logo:active {
+  animation: bounce 0.3s ease;
+}
+
