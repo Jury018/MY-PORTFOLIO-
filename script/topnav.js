@@ -6,7 +6,7 @@ export function topNav() {
   const allNavItems = document.querySelectorAll("nav.top-nav li");
   const topNavHeight = topNav.offsetHeight;
 
-  / Set scroll padding dynamically
+  //Set scroll padding dynamically
   document.documentElement.style.setProperty(
     "--scroll-padding",
     `${topNavHeight + 30}px`
