@@ -1,52 +1,69 @@
 export function topNav() {
-  const topNav = document.querySelector('nav.top-nav');
+  const topNav = document.querySelector("nav.top-nav");
+  if (!topNav) return; 
 
-  // Set padding to avoid overlap when navigating to sections
+  const sections = document.querySelectorAll(".section-container section");
+  const allNavItems = document.querySelectorAll("nav.top-nav li");
   const topNavHeight = topNav.offsetHeight;
+
+  / Set scroll padding dynamically
   document.documentElement.style.setProperty(
-    '--scroll-padding',
+    "--scroll-padding",
     `${topNavHeight + 30}px`
   );
 
-  const sections = document.querySelectorAll('.section-container section');
-  const allNavItems = document.querySelectorAll('nav.top-nav li');
-
-  // Function to reset active state
+  // Function to reset active states
   const resetActiveState = () => {
     allNavItems.forEach((navItem) => {
-      const navIcon = navItem.querySelector('.nav-icon');
-      navIcon.classList.remove('active');
+      navItem.querySelector(".nav-icon")?.classList.remove("active");
     });
   };
 
-  // Intersection Observer to toggle active state
+  // Intersection Observer for active state detection
   const sectionObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const sectionClass = entry.target.classList[1];
 
-          // Reset all icons and activate the matching one
           resetActiveState();
-          const matchingNav = Array.from(allNavItems).find((navItem) => {
-            return navItem.classList.contains(sectionClass);
-          });
+
+          const matchingNav = [...allNavItems].find((navItem) =>
+            navItem.classList.contains(sectionClass)
+          );
 
           if (matchingNav) {
-            const navIcon = matchingNav.querySelector('.nav-icon');
-            navIcon.classList.add('active');
+            matchingNav.querySelector(".nav-icon")?.classList.add("active");
           }
         }
       });
     },
     {
-      rootMargin: `-${topNavHeight}px 0px 0px 0px`, // Dynamic adjustment based on header height
-      threshold: 0.5, // Trigger when 50% of the section is visible
+      rootMargin: `-${topNavHeight}px 0px 0px 0px`, // Adjust based on header height
+      threshold: 0.5,
     }
   );
 
-  // Observe all sections
-  sections.forEach((section) => {
-    sectionObserver.observe(section);
+  // Observe sections
+  sections.forEach((section) => sectionObserver.observe(section));
+
+  /** 🔹 Tooltip Handling */
+  allNavItems.forEach((navItem) => {
+    const tooltip = navItem.querySelector("a p");
+    if (!tooltip) return;
+
+    navItem.addEventListener("mouseenter", () => {
+      tooltip.style.display = "block";
+      requestAnimationFrame(() => {
+        tooltip.style.opacity = "1";
+        tooltip.style.transform = "translateX(-50%) scale(1)";
+      });
+    });
+
+    navItem.addEventListener("mouseleave", () => {
+      tooltip.style.opacity = "0";
+      tooltip.style.transform = "translateX(-50%) scale(0)";
+      setTimeout(() => (tooltip.style.display = "none"), 200);
+    });
   });
 }
