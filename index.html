@@ -26,7 +26,8 @@
     <link rel="stylesheet" href="style/certificate.css">
     <link rel="stylesheet" href="style/footer.css">
     <link rel="stylesheet" href="style/cv.css">
-    <link rel="stylesheet" href="style/loading.css">    
+    <link rel="stylesheet" href="style/loading.css"> 
+    <link rel="stylesheet" href="style/education.css">   
     <title>PERSONAL PORTFOLIO</title>
   </head>
   <b
@@ -62,6 +63,12 @@
     <li class="nav skills">
       <a href="#skills-section"><p>Skills</p> <img class="nav-icon" src="images/icon/skill-icon.png" alt=""></a>
     </li>
+    <li class="nav education">
+      <a href="#education-section">
+        <p>Education</p>
+        <img class="nav-icon" src="images/icon/education.png" alt="Education Icon">
+      </a>
+    </li> 
     <li class="nav projects">
       <a href="#projects-section"><p>Projects</p> <img class="nav-icon" src="images/icon/projects-icon.png" alt=""></a>
     </li>
@@ -109,8 +116,14 @@
     </ul>
   </nav>
 </div>
-         <!-- CV Download Button -->
-    <a href="https://drive.google.com/file/d/1hc9f1wtFtiqOTqjaIbsJrJIj7RK72bo_/view?usp=drivesdk" class="download-cv-btn" target="_blank">View my CV</a>
+         <!-- CV Button Wrapper -->
+<div class="cv-button-wrapper">
+  <a href="https://drive.google.com/file/d/1hc9f1wtFtiqOTqjaIbsJrJIj7RK72bo_/view?usp=drivesdk" 
+     class="download-cv-btn" 
+     target="_blank">
+    View my CV
+  </a>
+</div>
 
         <div class="section-container">
           <!-- ABOUT SECTION -->
@@ -143,10 +156,44 @@
   <button class="tools-btn">TOOLS</button>
   
   <div class="skills-container tech-stack-skills d-grid">
-    <!-- Skills will be dynamically added here -->
+   
   </div>
   <div class="skills-container tools-skills d-grid">           
-    <!-- Tools will be dynamically added here -->
+   
+  </div>
+</section>
+
+      <!-- EDUCATION SECTION -->
+<section id="education-section" class="section education">
+  <h1 class="heading">MY <br><span>EDUCATION</span></h1>
+
+  <div class="education-container">
+    <!-- Education 1 -->
+    <div class="education-item">
+      <img src="images/icon/ua.png" alt="University Logo" class="school-logo">
+      <h3 class="degree">Bachelor of Science in Information Technology </h3>
+      <p class="institution">University of Antique</p>
+      <p class="duration">PRESENT</p>
+      <p class="description">Focused on web development, data structures, algorithms, and more.</p>
+    </div>
+
+    <!-- Education 2 -->
+    <div class="education-item">
+      <img src="images/icon/ans.png" alt="High School Logo" class="school-logo">
+      <h3 class="degree">Senior High School Graduate</h3>
+      <p class="institution">Antique National School</p>
+      <p class="duration">2021</p>
+      <p class="description">Graduated with honors. The continuation of Junior high to Senior department both have receive academic excellence.</p>
+    </div>
+
+    <!-- Education 3 -->
+    <div class="education-item">
+      <img src="images/icon/uphsd.png" alt="FreeCodeCamp Logo" class="school-logo">
+      <h3 class="degree">Grade School Graduate</h3>
+      <p class="institution">University of Perpetual Help System Dalta-Molino</p>
+      <p class="duration">2016</p>
+      <p class="description">Completed the Grade School level to Junior Level curriculum.</p>
+    </div>
   </div>
 </section>
 
@@ -240,7 +287,7 @@
         <img class="arrow-icon" src="images/icon/up-right-arrow.png" alt="arrow-icon">
       </div>
     </a>
-    <!-- Project 6 po  -->
+    <!-- Project 6  -->
     <a href="https://jury018.github.io/Sunrise-ft.-billie-eilish-/" target="_blank" class="project-link">
       <div class="project-card">
         <img src="images/icon/project5.jpg" alt="project-icon" class="project-icon">
