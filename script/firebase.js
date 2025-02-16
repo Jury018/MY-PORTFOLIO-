@@ -1,14 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { 
-  getFirestore, collection, addDoc, getDoc, updateDoc, setDoc, doc 
-} from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
 
 // Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBJvk0qhwZmLCpwKOhn1lWw1F3DHDucqF8",
   authDomain: "new-portfolio-9c126.firebaseapp.com",
-  databaseURL: "https://new-portfolio-9c126-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "new-portfolio-9c126",
   storageBucket: "new-portfolio-9c126.appspot.com",
   messagingSenderId: "213335134410",
@@ -27,14 +24,17 @@ async function trackProfileView() {
   const referrer = document.referrer || "Direct";
 
   try {
-    // Log event to Firebase Analytics
-    logEvent(analytics, 'profile_view', { referrer, userAgent });
-
-    // Save to Firestore
+    // Log view event to Firestore
     await addDoc(collection(db, "profile_views"), {
       timestamp: new Date().toISOString(),
-      userAgent: userAgent,
-      referrer: referrer
+      userAgent,
+      referrer
+    });
+
+    // Send event to Firebase Analytics
+    logEvent(analytics, "profile_view", {
+      referrer,
+      userAgent
     });
 
     console.log("Profile view recorded.");
@@ -43,5 +43,4 @@ async function trackProfileView() {
   }
 }
 
-// Export necessary functions
-export { db, collection, addDoc, getDoc, updateDoc, setDoc, doc, trackProfileView };
+export { db, analytics, trackProfileView, addDoc, collection };
