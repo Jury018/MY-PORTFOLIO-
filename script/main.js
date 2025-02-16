@@ -2,12 +2,13 @@
 import { skillFunctionality } from "./skills.js";
 import { topNav } from "./topnav.js";
 import { animation } from "./animation.js";
-import { db, collection, addDoc, viewDocRef, getDoc, updateDoc, setDoc } from './firebase.js';
+import { db, collection, addDoc, trackProfileView } from './firebase.js';
 
 // Initialize imported modules
 topNav();
 skillFunctionality();
 animation();
+
 
 // Add copyright dynamically
 const copyright = `&copy;${new Date().getFullYear()} BONFIRE. All rights reserved`;
