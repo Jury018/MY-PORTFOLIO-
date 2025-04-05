@@ -108,10 +108,10 @@
 /* ROUND PROGRESS BAR STYLING */
 #projects-section .progress-container {
   position: absolute;
-  top: 20px; /* Positioned at the top left for visibility */
-  left: 20px;
-  width: 50px;
-  height: 50px;
+  bottom: 20px; /* Positioned at the bottom */
+  right: 20px; /* Positioned on the right */
+  width: clamp(40px, 5vw, 80px); /* Responsive width */
+  height: clamp(40px, 5vw, 80px); /* Responsive height */
   border-radius: 50%;
   border: 3px solid rgba(255, 255, 255, 0.3);
   display: flex;
@@ -120,6 +120,7 @@
   background: transparent;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 2; /* Ensure it stays above the background but below other elements */
 }
 
 #projects-section .progress-bar {
@@ -130,32 +131,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.3s ease, background 0.3s ease; /* Smooth transition */
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
 #projects-section .progress-text {
   position: absolute;
-  font-size: 14px;
+  font-size: clamp(12px, 1.5vw, 18px); /* Responsive font size */
   color: #fff;
   font-weight: bold;
   z-index: 3;
   letter-spacing: 0.5px;
   transition: opacity 0.3s ease;
-}
-
-/* Progress Animation */
-@keyframes progress-fill {
-  0% {
-    background: conic-gradient(#f44336 0%, rgba(0, 0, 0, 0.1) 100%);
-  }
-  100% {
-    background: conic-gradient(#f44336 var(--progress-angle), rgba(0, 0, 0, 0.1) var(--progress-angle));
-  }
-}
-
-/* Apply the animation to the progress bar */
-.progress-bar.animate {
-  animation: progress-fill 1.5s ease-out forwards;
 }
 
 /* Hover Effects */
@@ -165,20 +151,18 @@
 }
 
 #projects-section .progress-container:hover .progress-bar {
-  background: conic-gradient(#f44336 0%, rgba(0, 0, 0, 0.2) 100%); /* Slight darkening on hover */
+  background: conic-gradient(#f44336 0%, rgba(0, 0, 0, 0.2) 100%);
 }
 
 #projects-section .progress-container:hover .progress-text {
-  opacity: 0.8; /* Slight text opacity effect */
+  opacity: 0.8;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   #projects-section .progress-container {
-    width: 40px;
-    height: 40px;
-    top: 15px;
-    left: 15px;
+    bottom: 15px; /* Adjusted for smaller screens */
+    right: 15px; /* Adjusted for smaller screens */
   }
 
   #projects-section .progress-text {
@@ -188,10 +172,8 @@
 
 @media (min-width: 1200px) {
   #projects-section .progress-container {
-    width: 60px;
-    height: 60px;
-    top: 20px;
-    left: 20px;
+    bottom: 30px; /* Increased spacing for larger screens */
+    right: 30px; /* Increased spacing for larger screens */
   }
 
   #projects-section .progress-text {
@@ -201,6 +183,6 @@
 
 @media (min-width: 1024px) {
   #projects-section .project-card {
-    padding-top: 60px; /* Ensure space between card and progress bar */
+    padding-bottom: 100px; /* Ensure sufficient space between the card and the progress bar */
   }
 }
