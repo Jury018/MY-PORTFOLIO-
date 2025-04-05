@@ -1,19 +1,20 @@
 .profile-container {
   padding: 2.3rem 10%;
   border-radius: 16px;
-  background-color: var(--primary-color);
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  backdrop-filter: blur(10px); /* Add blur effect */
   text-align: center;
   margin-bottom: 7rem;
   animation: profile-entry 1.5s ease forwards;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.2s ease-in-out; /* Add hover effect to the entire card */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
 }
 
 .profile-container:hover {
-  transform: translateY(-5px); /* Slightly lift the card on hover */
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Increase shadow on hover */
+  transform: translateY(-10px); /* Slightly lift the card on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add depth with shadow */
 }
 
 .profile-container .profile-pic {
@@ -21,11 +22,12 @@
   margin-bottom: 1.5rem;
   max-width: 26rem;
   object-fit: cover;
-  transition: transform 0.2s ease-in-out; /* Add hover effect to the image */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
 }
 
 .profile-container .profile-pic:hover {
-  transform: scale(1.05); /* Slightly enlarge the image on hover */
+  transform: scale(1.1); /* Slightly enlarge the image on hover */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
 }
 
 .profile-container .name {
@@ -34,27 +36,29 @@
   line-height: 1em;
   margin-bottom: 1rem;
   animation: name-entry 1.8s ease;
-  transition: color 0.2s ease-in-out; /* Change text color on hover */
+  transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth hover effect */
 }
 
 .profile-container .name:hover {
-  color: var(--accent-color); /* Adjust accent-color as needed */
+  color: var(--accent-color); /* Highlight name on hover */
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add subtle glow */
 }
 
 .profile-container .short-about-me {
   color: var(--pastel-color);
   font-size: 18px;
   font-weight: 600;
-  opacity: 0.7;
+  opacity: 0.8;
   margin-bottom: 2rem;
-  line-height: 1.2em;
+  line-height: 1.5em;
   animation: profile-about-entry 1.6s ease;
   max-width: 30rem;
-  transition: opacity 0.2s ease-in-out; /* Fade in/out on hover */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
 }
 
 .profile-container .short-about-me:hover {
   opacity: 1; /* Fully visible on hover */
+  transform: translateY(-5px); /* Slight lift on hover */
 }
 
 .profile-container .social-media-nav ul {
@@ -66,14 +70,15 @@
 
 .profile-container .social-media-nav ul li a img {
   max-width: 1.5rem;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.3s ease, filter 0.3s ease; /* Smooth hover effect */
 }
 
 .profile-container .social-media-nav ul li a img:hover {
-  transform: scale(1.1); 
+  transform: scale(1.2); /* Slightly enlarge icon on hover */
+  filter: brightness(1.2); /* Brighten icon on hover */
 }
 
-@media (width >= 1000px) {
+@media (min-width: 1000px) {
   .profile-container.fixed {
     position: sticky;
     top: 5.3rem;
@@ -83,5 +88,39 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+}
+
+/* ENTRY ANIMATIONS */
+@keyframes profile-entry {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes name-entry {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes profile-about-entry {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
