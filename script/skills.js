@@ -17,7 +17,7 @@ export function skillFunctionality() {
       icon: 'images/icon/js (1).png',
       name: 'JAVASCRIPT',
       type: 'tech-stack',
-      progress: 65
+      progress: 80
     },
     {
       icon: 'images/icon/java-1.png',
@@ -71,7 +71,7 @@ export function skillFunctionality() {
       icon: 'images/icon/vstudio.png',
       name: 'VISUAL STUDIO',
       type: 'tool',
-      progress: 20
+      progress: 60
     }
   ];
 
