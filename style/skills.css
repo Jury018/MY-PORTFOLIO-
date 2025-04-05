@@ -46,6 +46,15 @@
   padding: 1rem;
 }
 
+/* Default visibility */
+#skills-section .skills-container.tech-stack-skills {
+  display: grid; /* Show tech stack by default */
+}
+
+#skills-section .skills-container.tools-skills {
+  display: none; /* Hide tools by default */
+}
+
 /* SKILL ITEM */
 #skills-section .skills-container .skill {
   font-size: var(--XS-small-Fsize);
