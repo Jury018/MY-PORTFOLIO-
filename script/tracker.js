@@ -44,8 +44,7 @@ const trackUser = async () => {
       device_brand: device.device_brand,
       device_model: device.device_model,
       screen_size: device.screen,
-      session_id: sessionId,
-      created_at: new Date().toISOString()
+      session_id: sessionId
     }
   ]);
 
