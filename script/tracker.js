@@ -2,7 +2,7 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
 // Initialize Supabase client (replace with your actual Supabase credentials)
-const supabase = createClient("https://vuyukqoyemhsogjcemaz.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1eXVrcW95ZW1oc29namNlbWF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ0Njg5NzEsImV4cCI6MjA2MDA0NDk3MX0.TywjagLRCgvj-aJJxGeUlg27MFDFgR9N9JDCjN9F0tQ");
+const supabase = createClient("https://vuyukqoyemhsogjcemaz.supabase.co", "your-api-key-here");
 
 // Function to fetch user's IP address
 const getIP = async () => {
