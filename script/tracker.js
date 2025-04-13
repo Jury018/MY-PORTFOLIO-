@@ -71,9 +71,15 @@ const getDeviceDetails = async () => {
   }
 };
 
+// Convert UTC timestamp to Philippines Time (UTC+8)
+const convertToPhilippinesTime = (utcTimestamp) => {
+  const utcDate = new Date(utcTimestamp + 'Z');
+  return utcDate.toLocaleString('en-US', { timeZone: 'Asia/Manila' });
+};
+
 // Main tracking logic
 const trackUser = async () => {
-  const ip = await getIP();
+  const ip = await getIP();  // Now it's defined
   const device = await getDeviceDetails();
 
   // Manage session
@@ -106,6 +112,8 @@ const trackUser = async () => {
   }
 
   // Insert tracking data
+  const timestamp = new Date().toISOString();  // Get UTC timestamp
+
   const { error: insertError } = await supabase.from("views").insert([{
     ip: ip,
     os: device.os,
@@ -117,13 +125,17 @@ const trackUser = async () => {
     session_id: sessionId,
     page_url: window.location.href,
     referrer: document.referrer,
-    timestamp: new Date().toISOString()
+    timestamp: timestamp,  // Store UTC timestamp in database
   }]);
 
   if (insertError) {
     console.error("Tracking failed:", insertError);
   } else {
     console.log("User tracked successfully");
+
+    // Log converted time for debugging
+    const philippinesTimestamp = convertToPhilippinesTime(timestamp);  // Convert to Philippines time
+    console.log("Timestamp (Philippines Time):", philippinesTimestamp);  // For display purposes (on the frontend or in debug logs)
   }
 };
 
