@@ -2,27 +2,29 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 import UAParser from "https://cdn.jsdelivr.net/npm/ua-parser-js@1.0.2/+esm";
 
-// Initialize Supabase client
+// Supabase init
 const supabase = createClient(
   "https://vuyukqoyemhsogjcemaz.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1eXVrcW95ZW1oc29namNlbWF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ0Njg5NzEsImV4cCI6MjA2MDA0NDk3MX0.TywjagLRCgvj-aJJxGeUlg27MFDFgR9N9JDCjN9F0tQ"
 );
 
-// Generate UUID
+// UUID generator
 const generateSessionId = () => crypto.randomUUID();
 
-// Hash generator (simple fingerprint string → SHA-256)
+// SHA-256 fingerprint hash
 const hashFingerprint = async (input) => {
   const encoder = new TextEncoder();
   const data = encoder.encode(input);
   const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+  return Array.from(new Uint8Array(hashBuffer))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
 };
 
-// IP getter
+// CORS-safe IP fetcher
 const getIP = async () => {
   try {
-    const res = await fetch("https://ipapi.co/json/");
+    const res = await fetch("https://api64.ipify.org?format=json");
     const data = await res.json();
     return data.ip || "unknown";
   } catch {
@@ -30,7 +32,7 @@ const getIP = async () => {
   }
 };
 
-// Device detail extractor (userAgentData first, fallback to UAParser)
+// Device info
 const getDeviceDetails = async () => {
   try {
     if (navigator.userAgentData) {
@@ -71,33 +73,28 @@ const getDeviceDetails = async () => {
   }
 };
 
-// Convert UTC timestamp to Philippines Time (UTC+8)
-const convertToPhilippinesTime = (utcTimestamp) => {
-  const utcDate = new Date(utcTimestamp);
-  // Adjust to UTC+8 (Philippines Time)
-  const philippinesOffset = 8 * 60 * 60 * 1000; // 8 hours in milliseconds
-  const philippinesTime = new Date(utcDate.getTime() + philippinesOffset);
-  return philippinesTime.toLocaleString('en-US', { timeZone: 'Asia/Manila' });
-};
-
-// Main tracking logic
+// Main tracker
 const trackUser = async () => {
-  const ip = await getIP();  // Now it's defined
+  const ip = await getIP();
   const device = await getDeviceDetails();
 
-  // Manage session
+  // Session ID and session start time
   let sessionId = localStorage.getItem("session_id");
+  let sessionStart = localStorage.getItem("session_start");
+
   if (!sessionId) {
     sessionId = generateSessionId();
+    sessionStart = new Date().toISOString();
     localStorage.setItem("session_id", sessionId);
+    localStorage.setItem("session_start", sessionStart);
   }
 
-  // Create a device fingerprint
+  // Fingerprint hash
   const fingerprintRaw = `${ip}|${device.os}|${device.browser}|${device.device_brand}|${device.device_model}`;
   const fingerprintHash = await hashFingerprint(fingerprintRaw);
   localStorage.setItem("fp_hash", fingerprintHash);
 
-  // Check if already tracked this session/device
+  // Check if session already exists
   const { data: existing, error: checkError } = await supabase
     .from("views")
     .select("session_id")
@@ -105,18 +102,16 @@ const trackUser = async () => {
     .limit(1);
 
   if (checkError) {
-    console.error("Error checking tracking record:", checkError);
+    console.error("Check error:", checkError);
     return;
   }
 
   if (existing && existing.length > 0) {
-    console.log("Device already tracked for this session.");
-    return; // Skip insert
+    console.log("Session already tracked");
+    return;
   }
 
-  // Insert tracking data
-  const timestamp = new Date().toISOString();  // Get UTC timestamp
-
+  // Initial insert
   const { error: insertError } = await supabase.from("views").insert([{
     ip: ip,
     os: device.os,
@@ -128,19 +123,41 @@ const trackUser = async () => {
     session_id: sessionId,
     page_url: window.location.href,
     referrer: document.referrer,
-    timestamp: timestamp,  // Store UTC timestamp in database
+    timestamp: sessionStart,
+    session_duration: 0,
+    last_activity: sessionStart
   }]);
 
   if (insertError) {
-    console.error("Tracking failed:", insertError);
+    console.error("Insert failed:", insertError);
   } else {
-    console.log("User tracked successfully");
-
-    // Log converted time for debugging
-    const philippinesTimestamp = convertToPhilippinesTime(timestamp);  // Convert to Philippines time
-    console.log("Timestamp (Philippines Time):", philippinesTimestamp);  // For display purposes (on the frontend or in debug logs)
+    console.log("Session tracked successfully.");
   }
 };
+
+// Realtime session updater every 10s
+setInterval(async () => {
+  const sessionId = localStorage.getItem("session_id");
+  const sessionStart = localStorage.getItem("session_start");
+
+  if (!sessionId || !sessionStart) return;
+
+  const now = new Date();
+  const start = new Date(sessionStart);
+  const duration = Math.floor((now - start) / 1000); // in seconds
+
+  const { error } = await supabase
+    .from("views")
+    .update({
+      session_duration: duration,
+      last_activity: now.toISOString()
+    })
+    .eq("session_id", sessionId);
+
+  if (error) {
+    console.error("Realtime session update failed:", error.message);
+  }
+}, 10000); // Every 10 seconds
 
 // Auto-run on load
 trackUser();
