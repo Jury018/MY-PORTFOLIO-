@@ -73,8 +73,11 @@ const getDeviceDetails = async () => {
 
 // Convert UTC timestamp to Philippines Time (UTC+8)
 const convertToPhilippinesTime = (utcTimestamp) => {
-  const utcDate = new Date(utcTimestamp + 'Z');
-  return utcDate.toLocaleString('en-US', { timeZone: 'Asia/Manila' });
+  const utcDate = new Date(utcTimestamp);
+  // Adjust to UTC+8 (Philippines Time)
+  const philippinesOffset = 8 * 60 * 60 * 1000; // 8 hours in milliseconds
+  const philippinesTime = new Date(utcDate.getTime() + philippinesOffset);
+  return philippinesTime.toLocaleString('en-US', { timeZone: 'Asia/Manila' });
 };
 
 // Main tracking logic
