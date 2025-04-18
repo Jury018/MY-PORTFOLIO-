@@ -1,16 +1,15 @@
 :root {
   /* Font Sizes */
-  --XS-Fsize: 1rem;
-  --small-Fsize: 18px;
-  --medium-Fsize: 26px;
-  --mobile-small-Fsize: 18px;
-  --mobile-large-Fsize: 42px;
-  --mobile-XL-Fsize: 45px;
-  --desktop-small-Fsize: 24px;
-  --small-Fsize: 18px;
-  --medium-Fsize: 1.6rem;
-  --desktop-large-Fsize: 4.375rem;
-  --desktop-XL-Fsize: 88px;
+  --XS-Fsize: clamp(0.9rem, 1vw, 1.1rem);
+  --small-Fsize: clamp(1rem, 1.2vw, 1.3rem);
+  --medium-Fsize: clamp(1.3rem, 1.8vw, 1.8rem);
+  --mobile-small-Fsize: clamp(1rem, 1.2vw, 1.3rem);
+  --mobile-large-Fsize: clamp(2rem, 3vw, 2.6rem);
+  --mobile-XL-Fsize: clamp(2.5rem, 4vw, 3rem);
+  --desktop-small-Fsize: clamp(1.5rem, 2vw, 2rem);
+  --medium-Fsize: clamp(1.3rem, 1.8vw, 1.8rem);
+  --desktop-large-Fsize: clamp(3rem, 4vw, 4.5rem);
+  --desktop-XL-Fsize: clamp(5rem, 6vw, 6rem);
 
   /* Colors */
   --primary-color: #F0F0F0; /* Off-White */
@@ -67,10 +66,9 @@ section .heading span{
   color: var(--pastel-color)
 }
 
-@media(width >= 1000px){
+@media (min-width: 1000px) {
   main{
-    display: flex;
-    column-gap: 5rem;
+    display: block;
     padding-top: 8rem;
   }
 
@@ -78,11 +76,42 @@ section .heading span{
     margin-top: 0rem;
   }
 
+  section {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 4rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
   section .heading{
     font-size: clamp(var(--mobile-XL-Fsize), 8vw, var(--desktop-XL-Fsize));
-    text-align: left;
+    text-align: center;
     line-height: 1em;
     margin-bottom: 1rem; 
   }
 
+}
+
+@media (max-width: 600px) {
+  section {
+    padding: 1rem 1.5rem;
+  }
+  .cv-button-wrapper {
+    padding: 0 1rem;
+  }
+  .download-cv-btn {
+    width: 100%;
+    font-size: var(--mobile-small-Fsize);
+  }
+}
+
+@media (min-width: 1400px) {
+  .main-wrapper {
+    --main-wrapper-max-width: 1400px;
+    --main-wrapper-padding: 5%;
+    width: min(var(--main-wrapper-max-width), 100% - var(--main-wrapper-padding));
+    margin-inline: auto;
+  }
 }
