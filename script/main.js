@@ -11,7 +11,7 @@ animation();
 const copyright = `&copy;${new Date().getFullYear()} BONFIRE. All rights reserved`;
 document.querySelector('footer p').innerHTML = copyright;
 
-// DOMContentLoaded Event
+// Utility function: debounce
 document.addEventListener("DOMContentLoaded", async () => {
   // Add CSS styles dynamically
   const style = document.createElement("style");
@@ -34,29 +34,36 @@ document.addEventListener("DOMContentLoaded", async () => {
       padding: 20px;
       border-radius: 8px;
       text-align: center;
-      width: 300px;
+      width: 320px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 1rem;
+      color: #333;
     }
 
     #alertMessage {
       color: black;  
+      margin-bottom: 15px;
     }
 
     .btn {
-      background-color: red;  
+      background-color:rgb(151, 155, 160);  
       color: white;
       border: none;
-      padding: 10px 15px;
+      padding: 10px 20px;
       cursor: pointer;
       border-radius: 5px;
-      margin-top: 15px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
     }
 
     .btn:hover {
-      background-color: darkred;  
+      background-color:rgb(255, 2, 2);  
     }
 
     .word-warning,
-    .name-error {
+    .name-error,
+    .email-error {
       color: red;
       font-size: 0.9em;
       margin-top: 5px;
@@ -67,6 +74,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       color: gray;
       font-size: 0.9em;
       margin-top: 5px;
+    }
+
+    /* Modern input validation styles */
+    input.valid, textarea.valid {
+      border: 2px solid #4CAF50; /* Green */
+      background-color: #e8f5e9;
+    }
+
+    input.invalid, textarea.invalid {
+      border: 2px solid #f44336; /* Red */
+      background-color: #ffebee;
     }
   `;
   document.head.appendChild(style);
@@ -89,6 +107,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     customAlert.style.display = "none";
   });
 
+  // Show modal alert function
+  const showModalAlert = (message) => {
+    const alertMessage = document.querySelector("#alertMessage");
+    alertMessage.textContent = message;
+    customAlert.style.display = "flex";
+  };
+
   // Form validation and submission
   const form = document.querySelector("#contactForm");
 
@@ -101,6 +126,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nameError = document.createElement('p');
     nameError.className = 'name-error';
     nameInput.parentNode.appendChild(nameError);
+
+    const emailError = document.createElement('p');
+    emailError.className = 'email-error';
+    emailInput.parentNode.appendChild(emailError);
 
     const wordWarning = document.createElement('p');
     wordWarning.className = 'word-warning';
@@ -130,66 +159,77 @@ const suspiciousNames = [
   "friend", "test123", "pogi"
 ];
 
-// Validate name input
+// Modernized name validation
 const validateName = () => {
   const name = nameInput.value.trim();
   const maxLength = 50;
-  const minLength = 3;  // Ensure name is at least 3 characters
-  const nameRegex = /^[a-zA-Z\s]+$/;  // Only letters and spaces
+  const minLength = 3;
+  // Allow letters, spaces, hyphens, apostrophes
+  const nameRegex = /^[a-zA-Z]+([ '-][a-zA-Z]+)*$/;
   const repeatedPatternRegex = /^(.)\1{2,}$/;  // Prevent repeated characters (e.g., "aaaa")
-  const numberSequenceRegex = /\d+/;  // Disallow numbers
-
-  // Check for leading/trailing spaces
-  if (name !== name.trim()) {
-    nameError.textContent = "Name cannot have leading or trailing spaces.";
+  
+  if (name.length < minLength) {
+    nameError.textContent = `Name must be at least ${minLength} characters.`;
     nameError.style.display = "block";
+    nameInput.classList.add('invalid');
+    nameInput.classList.remove('valid');
     return false;
   }
-
-  // Check if name contains only letters and spaces
-  if (!nameRegex.test(name)) {
-    nameError.textContent = "Name can only contain letters and spaces.";
-    nameError.style.display = "block";
-    return false;
-  }
-
-  // Check for length
   if (name.length > maxLength) {
     nameError.textContent = `Name cannot exceed ${maxLength} characters.`;
     nameError.style.display = "block";
-    return false;
-  } else if (name.length < minLength) {
-    nameError.textContent = `Name must be at least ${minLength} characters.`;
-    nameError.style.display = "block";
+    nameInput.classList.add('invalid');
+    nameInput.classList.remove('valid');
     return false;
   }
-
-  // Check for suspicious names
-  if (suspiciousNames.includes(name.toLowerCase())) {
-    nameError.textContent = "Suspicious name detected. Please use a valid name.";
+  if (!nameRegex.test(name)) {
+    nameError.textContent = "Name can only contain letters, spaces, hyphens, and apostrophes.";
     nameError.style.display = "block";
+    nameInput.classList.add('invalid');
+    nameInput.classList.remove('valid');
     return false;
   }
-
-  // Check for repeated characters (e.g., "aaaa", "bbbb")
   if (repeatedPatternRegex.test(name)) {
     nameError.textContent = "Name cannot contain repeated characters.";
     nameError.style.display = "block";
+    nameInput.classList.add('invalid');
+    nameInput.classList.remove('valid');
     return false;
   }
-
-  // Check for numbers in name
-  if (numberSequenceRegex.test(name)) {
-    nameError.textContent = "Name cannot contain numbers.";
+  if (suspiciousNames.includes(name.toLowerCase())) {
+    nameError.textContent = "Suspicious name detected. Please use a valid name.";
     nameError.style.display = "block";
+    nameInput.classList.add('invalid');
+    nameInput.classList.remove('valid');
     return false;
   }
-
-  // Capitalize name to ensure proper format (optional)
+  // Capitalize each word
   const capitalizeName = name.replace(/\b\w/g, char => char.toUpperCase());
   nameInput.value = capitalizeName;
 
   nameError.style.display = "none";
+  nameInput.classList.remove('invalid');
+  nameInput.classList.add('valid');
+  return true;
+};
+
+// Email validation
+const validateEmail = () => {
+  const email = emailInput.value.trim();
+  // Basic email regex pattern
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(email)) {
+    emailError.textContent = "Please enter a valid email address.";
+    emailError.style.display = "block";
+    emailInput.classList.add('invalid');
+    emailInput.classList.remove('valid');
+    return false;
+  }
+
+  emailError.style.display = "none";
+  emailInput.classList.remove('invalid');
+  emailInput.classList.add('valid');
   return true;
 };
 
@@ -201,31 +241,86 @@ const validateName = () => {
       if (wordCount < 10) {
         wordWarning.textContent = "Feedback must be at least 10 words.";
         wordWarning.style.display = "block";
+        messageInput.classList.add('invalid');
+        messageInput.classList.remove('valid');
         return false;
       } else if (wordCount > 500) {
         wordWarning.textContent = "Feedback cannot exceed 500 words.";
         wordWarning.style.display = "block";
+        messageInput.classList.add('invalid');
+        messageInput.classList.remove('valid');
         return false;
       }
 
       wordWarning.style.display = "none";
+      messageInput.classList.remove('invalid');
+      messageInput.classList.add('valid');
       return true;
     };
 
-    // Attach event listeners
-    nameInput.addEventListener('input', validateName);
-    messageInput.addEventListener('input', updateWordCount);
+    // Attach event listeners with debounce for better UX
+    let debounceTimer;
+    nameInput.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(validateName, 300);
+    });
+    emailInput.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(validateEmail, 300);
+    });
+    messageInput.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(updateWordCount, 300);
+    });
 
     // Form submit event
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const showCustomAlert = (message) => {
-        const alertMessage = document.querySelector("#alertMessage");
-        alertMessage.textContent = message;
-        customAlert.style.display = "flex";
+
+      // Validate inputs before submission
+      const isNameValid = validateName();
+      const isEmailValid = validateEmail();
+      const isMessageValid = updateWordCount();
+      if (!isNameValid || !isEmailValid || !isMessageValid) {
+        showModalAlert("Please input all fields correctly.");
+        return;
+      }
+
+      // Prepare form data
+      const formData = {
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        message: messageInput.value.trim(),
+        access_key: "86e63595-8335-4c19-89e4-8d9f3dcdaa94"
       };
-      showCustomAlert("Under maintenance. Please check back later.");
-      return;
+
+      // Show loading message
+      showModalAlert("Sending message...");
+
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          showModalAlert("Message sent successfully!");
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        } else {
+          showModalAlert("Failed to send message. Please try again later.");
+        }
+      } catch (error) {
+        showModalAlert("An error occurred. Please try again later.");
+        console.error("Error sending form:", error);
+      }
     });
   } else {
     console.error("Form not found!");
