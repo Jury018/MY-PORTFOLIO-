@@ -1,11 +1,11 @@
-#certificates-section .heading {
+/* #certificates-section .heading {
   margin-bottom: 2rem;
   font-size: 2rem;
   text-align: center;
   color: var(--primary-color-light);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-}
+} */
 
 .certificates-container {
   display: grid; /* Use grid for more control over alignment */
@@ -48,10 +48,9 @@
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
-.certificate-title 
-  .project-title {
+.certificate-title, 
+.project-title {
   font-size: calc(var(--medium-Fsize) + 2px);  
-}
   font-weight: bold;
   color: var(--primary-color-light);
   margin-bottom: 0.5rem;
@@ -195,6 +194,14 @@
 
   .lightbox-btn {
     font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  #certificates-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
   }
 }
 
