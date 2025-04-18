@@ -174,10 +174,16 @@
   #projects-section .progress-container {
     bottom: 30px; /* Increased spacing for larger screens */
     right: 30px; /* Increased spacing for larger screens */
+    width: 60px; /* Limit max width */
+    height: 60px; /* Limit max height */
   }
 
   #projects-section .progress-text {
     font-size: 16px;
+  }
+
+  #projects-section .project-card {
+    padding-bottom: 80px; /* Increase padding to avoid overlap */
   }
 }
 
