@@ -9,14 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="icon" href="images/favicon.ico" type="image/png">
     <!-- Firebase SDK -->
-<script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
-<script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"></script>
-<script type="module" src="script/firebase.js"></script>
-<script type="module" src="script/main.js"></script>
-<script src="script/certificate.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/1.0.2/ua-parser.min.js"></script>
-<script type="module" src="script/tracker.js"></script>
-
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"></script>
+    <script type="module" src="script/firebase.js"></script>
+    <script type="module" src="script/main.js"></script>
+    <script src="script/certificate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/1.0.2/ua-parser.min.js"></script>
+    <script type="module" src="script/tracker.js"></script>
 
     <link rel="stylesheet" href="style/animation.css">  
     <link rel="stylesheet" href="style/global.css">
@@ -32,129 +31,124 @@
     <link rel="stylesheet" href="style/education.css">   
     <title>PERSONAL PORTFOLIO</title>
   </head>
-  <b
-    <div class="main-wrapper">
-     <!-- TOP-NAVIGATION -->
-<nav class="top-nav">
-  <ul>
-    <li class="nav home">
-  <a href="#" onclick="scrollToTopAndReload();"><p>Home</p> <img class="nav-icon" src="images/icon/home-icon.png" alt=""></a>
-</li>
 
-<script>
-  function scrollToTopAndReload() {
-    document.querySelector('.nav.home').classList.add('active'); 
+  <div class="main-wrapper">
+    <!-- TOP-NAVIGATION -->
+    <nav class="top-nav">
+      <ul>
+        <li class="nav home">
+          <a href="#" onclick="scrollToTopAndReload();"><p>Home</p> <img class="nav-icon" src="images/icon/home-icon.png" alt=""></a>
+        </li>
 
-    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+        <script>
+          function scrollToTopAndReload() {
+            document.querySelector('.nav.home').classList.add('active'); 
 
-    setTimeout(() => {
-      document.querySelector('.nav.home').classList.remove('active'); 
-    }, 500); 
-  }
-</script>
+            window.scrollTo({ top: 0, behavior: 'smooth' }); 
 
-<style>
-  .nav.home.active {
-    background-color: lightgray; 
-  }
-</style>
+            setTimeout(() => {
+              document.querySelector('.nav.home').classList.remove('active'); 
+            }, 500); 
+          }
+        </script>
 
-    <li class="nav about">
-      <a href="#about-section"><p>About</p> <img class="nav-icon" src="images/icon/about-icon.png" alt=""></a>
-    </li>
-    <li class="nav skills">
-      <a href="#skills-section"><p>Skills</p> <img class="nav-icon" src="images/icon/skill-icon.png" alt=""></a>
-    </li>
-    <li class="nav education">
-      <a href="#education-section">
-        <p>Education</p>
-        <img class="nav-icon" src="images/icon/education.png" alt="Education Icon">
-      </a>
-    </li> 
-    <li class="nav projects">
-      <a href="#projects-section"><p>Projects</p> <img class="nav-icon" src="images/icon/projects-icon.png" alt=""></a>
-    </li>
-    <li class="nav certification">
-      <a href="#certificates-section"><p>Certification</p> <img class="nav-icon" src="images/icon/certificate-icon.png" alt=""></a>
-    </li>
-  </ul>
-  <a href="#contact-section" id="let-connect-btn">Let's Connect</a>
-</nav>
+        <style>
+          .nav.home.active {
+            background-color: lightgray; 
+          }
+        </style>
+
+        <li class="nav about">
+          <a href="#about-section"><p>About</p> <img class="nav-icon" src="images/icon/about-icon.png" alt=""></a>
+        </li>
+        <li class="nav skills">
+          <a href="#skills-section"><p>Skills</p> <img class="nav-icon" src="images/icon/skill-icon.png" alt=""></a>
+        </li>
+        <li class="nav education">
+          <a href="#education-section">
+            <p>Education</p>
+            <img class="nav-icon" src="images/icon/education.png" alt="Education Icon">
+          </a>
+        </li> 
+        <li class="nav projects">
+          <a href="#projects-section"><p>Projects</p> <img class="nav-icon" src="images/icon/projects-icon.png" alt=""></a>
+        </li>
+        <li class="nav certification">
+          <a href="#certificates-section"><p>Certification</p> <img class="nav-icon" src="images/icon/certificate-icon.png" alt=""></a>
+        </li>
+      </ul>
+      <a href="#contact-section" id="let-connect-btn">Let's Connect</a>
+    </nav>
           
-      <main>
-        <!-- PROFILE CARD -->
-        <div class="profile-container fixed">
-  <img src="images/mypic1.png" alt="" class="profile-pic">
-  <h3 class="name">Bon Jury Pecaoco </h3>
-  <p class="short-about-me">"BONFIRE"</p>
+    <main>
+      <!-- PROFILE CARD -->
+      <div class="profile-container fixed">
+        <img src="images/mypic1.png" alt="" class="profile-pic">
+        <h3 class="name">Bon Jury Pecaoco </h3>
+        <p class="short-about-me">"BONFIRE"</p>
 
-  <nav class="social-media-nav">
-    <ul>
-      <li>
-        <a href="https://www.instagram.com/jury_dgaf/profilecard/?igsh=aGpqMHV2ejY4ZW5u" target="_blank"> 
-          <img src="images/icon/instagram.png" alt="insta-icon">
+        <nav class="social-media-nav">
+          <ul>
+            <li>
+              <a href="https://www.instagram.com/jury_dgaf/profilecard/?igsh=aGpqMHV2ejY4ZW5u" target="_blank"> 
+                <img src="images/icon/instagram.png" alt="insta-icon">
+              </a>
+            </li>
+            <li>
+              <a href="https://x.com/jury_bon?t=iIKg5DIT1jStj3_l3-cNDg&s=09" target="_blank"> 
+                <img src="images/icon/twitter.png" alt="twitter-icon">
+              </a>
+            </li>
+            <li>
+              <a href="https://www.tiktok.com/@jury_dgaf?_t=ZS-8so3jcZcW6K&_r=1" target="_blank"> 
+                <img src="images/icon/tiktok.png" alt="twitter-icon">
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/bon.jury.pecaoco.2024?mibextid=ZbWKwL" target="_blank"> 
+                <img src="images/icon/facebook.png" alt="fb-icon">
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/Jury018" target="_blank"> 
+                <img src="images/icon/github.png" alt="github-icon">
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- CV Button Wrapper -->
+      <div class="cv-button-wrapper">
+        <a href="https://bonfire69.my.canva.site/bonfire-resume" 
+           class="download-cv-btn" 
+           target="_blank">
+          View my CV
         </a>
-      </li>
-      <li>
-        <a href="https://x.com/jury_bon?t=iIKg5DIT1jStj3_l3-cNDg&s=09" target="_blank"> 
-          <img src="images/icon/twitter.png" alt="twitter-icon">
-        </a>
-      </li>
-      <li>
-        <a href="https://www.tiktok.com/@jury_dgaf?_t=ZS-8so3jcZcW6K&_r=1" target="_blank"> 
-          <img src="images/icon/tiktok.png" alt="twitter-icon">
-        </a>
-      </li>
-      <li>
-        <a href="https://www.facebook.com/bon.jury.pecaoco.2024?mibextid=ZbWKwL" target="_blank"> 
-          <img src="images/icon/facebook.png" alt="fb-icon">
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/Jury018" target="_blank"> 
-          <img src="images/icon/github.png" alt="github-icon">
-        </a>
-      </li>
-    </ul>
-  </nav>
-</div>
-         <!-- CV Button Wrapper -->
-<div class="cv-button-wrapper">
-  <a href="https://bonfire69.my.canva.site/bonfire-resume" 
-     class="download-cv-btn" 
-     target="_blank">
-    View my CV
-  </a>
-</div>
+      </div>
 
-        <div class="section-container">
-          <!-- ABOUT SECTION -->
-<section id="about-section" class="section about">
-  <h1 class="heading">NOVICE<br><span>DEVELOPER</span></br></h1>
-  <p class="more-about-me">
-    I am an aspiring full-stack developer and a first-year college student with a strong interest in web development and cybersecurity. I have built a solid foundation in HTML, CSS, and JavaScript, which I use to develop visually appealing and user-friendly websites. My current focus is on expanding my skills in backend development to become a well-rounded full-stack developer.
-
-In addition to web development, I am also exploring cybersecurity, aiming to integrate secure practices into my future projects. I approach every challenge as an opportunity to learn, improve, and innovate. I am currently seeking remote internships or part-time opportunities that will allow me to grow professionally while continuing my academic journey.
-
-
-  </p>
-
-  <div class="years-of-doing d-grid">
-    <div class="experience">
-      <h3 class="years">+2</h3>
-      <p>YEARS OF <br>EXPERIENCE</br></p>
-    </div>
-    <div class="projects">
-      <h3 class="years">+10</h3>
-      <p> PROJECTS <br> COMPLETED</br></p>
-    </div>
-    <div class="clients">
-      <h3 class="years">+4</h3>
-      <p>LOCAL <br>CLIENTS</br></p>
-    </div>
-  </div>
-</section>
-          
+      <!-- ABOUT SECTION -->
+      <section id="about-section" class="section about">
+        <h1 class="heading">NOVICE<br><span>DEVELOPER</span></br></h1>
+        <p class="more-about-me">
+          I am an aspiring full-stack developer and a first-year college student with a strong interest in web development and cybersecurity. I have built a solid foundation in HTML, CSS, and JavaScript, which I use to develop visually appealing and user-friendly websites. My current focus is on expanding my skills in backend development to become a well-rounded full-stack developer.
+        </p>
+        <div class="years-of-doing d-grid">
+          <div class="experience">
+            <h3 class="years">+2</h3>
+            <p>YEARS OF <br>EXPERIENCE</br></p>
+          </div>
+          <div class="projects">
+            <h3 class="years">+10</h3>
+            <p> PROJECTS <br> COMPLETED</br></p>
+          </div>
+          <div class="clients">
+            <h3 class="years">+4</h3>
+            <p>LOCAL <br>CLIENTS</br></p>
+          </div>
+        </div>
+      </section>
+         
           <!-- SKILL SECTION -->
 <section id="skills-section" class="section skills">
   <h1 class="heading">SPECIALIZED <br><span>SKILLS</span></h1>
