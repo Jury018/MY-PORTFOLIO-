@@ -21,7 +21,7 @@ const hashFingerprint = async (input) => {
     .join('');
 };
 
-// CORS-safe IP fetcher
+// Get public IP
 const getIP = async () => {
   try {
     const res = await fetch("https://api64.ipify.org?format=json");
@@ -32,14 +32,13 @@ const getIP = async () => {
   }
 };
 
-// Device info
+// Get device details
 const getDeviceDetails = async () => {
   try {
     if (navigator.userAgentData) {
       const ua = await navigator.userAgentData.getHighEntropyValues([
         "platform", "platformVersion", "architecture", "model", "uaFullVersion"
       ]);
-
       return {
         os: `${ua.platform} ${ua.platformVersion}`,
         browser: `${navigator.userAgentData.brands[0]?.brand || "unknown"} ${ua.uaFullVersion}`,
@@ -51,7 +50,6 @@ const getDeviceDetails = async () => {
     } else {
       const parser = new UAParser();
       const result = parser.getResult();
-
       return {
         os: `${result.os.name || "unknown"} ${result.os.version || ""}`,
         browser: `${result.browser.name || "unknown"} ${result.browser.version || ""}`,
@@ -73,12 +71,26 @@ const getDeviceDetails = async () => {
   }
 };
 
+// Stable device fingerprint
+const generateDeviceId = async (device, ip) => {
+  const raw = [
+    ip,
+    device.os.toLowerCase().split(" ")[0],
+    device.device_brand.toLowerCase(),
+    device.device_model.toLowerCase(),
+    device.screen,
+    navigator.platform,
+    navigator.language
+  ].join("|");
+
+  return await hashFingerprint(raw);
+};
+
 // Main tracker
 const trackUser = async () => {
   const ip = await getIP();
   const device = await getDeviceDetails();
 
-  // Session ID and session start time
   let sessionId = localStorage.getItem("session_id");
   let sessionStart = localStorage.getItem("session_start");
 
@@ -89,31 +101,21 @@ const trackUser = async () => {
     localStorage.setItem("session_start", sessionStart);
   }
 
-  // Fingerprint hash
-  const fingerprintRaw = `${ip}|${device.os}|${device.browser}|${device.device_brand}|${device.device_model}`;
-  const fingerprintHash = await hashFingerprint(fingerprintRaw);
-  localStorage.setItem("fp_hash", fingerprintHash);
+  const deviceId = await generateDeviceId(device, ip);
+  localStorage.setItem("device_id", deviceId);
 
-  // Check if session already exists
   const { data: existing, error: checkError } = await supabase
     .from("views")
-    .select("session_id")
-    .eq("session_id", sessionId)
+    .select("ip")
+    .eq("ip", ip)
     .limit(1);
 
   if (checkError) {
-    console.error("Check error:", checkError);
+    console.error("Supabase check error:", checkError);
     return;
   }
 
-  if (existing && existing.length > 0) {
-    console.log("Session already tracked");
-    return;
-  }
-
-  // Initial insert
-  const { error: insertError } = await supabase.from("views").insert([{
-    ip: ip,
+  const payload = {
     os: device.os,
     browser: device.browser,
     device_type: device.device_type,
@@ -121,30 +123,50 @@ const trackUser = async () => {
     device_model: device.device_model,
     screen_size: device.screen,
     session_id: sessionId,
+    device_id: deviceId,
     page_url: window.location.href,
     referrer: document.referrer,
     timestamp: sessionStart,
     session_duration: 0,
     last_activity: sessionStart
-  }]);
+  };
 
-  if (insertError) {
-    console.error("Insert failed:", insertError);
+  if (existing && existing.length > 0) {
+    const { error: updateError } = await supabase
+      .from("views")
+      .update(payload)
+      .eq("ip", ip);
+
+    if (updateError) {
+      console.error("Update failed:", updateError.message);
+    } else {
+      console.log("Session updated.");
+    }
   } else {
-    console.log("Session tracked successfully.");
+    const insertPayload = { ...payload, ip };
+    const { error: insertError } = await supabase
+      .from("views")
+      .insert([insertPayload]);
+
+    if (insertError) {
+      console.error("Insert failed:", insertError.message);
+    } else {
+      console.log("Session tracked.");
+    }
   }
 };
 
-// Realtime session updater every 10s
+// Realtime session update every 10s
 setInterval(async () => {
   const sessionId = localStorage.getItem("session_id");
   const sessionStart = localStorage.getItem("session_start");
+  const ip = await getIP();
 
   if (!sessionId || !sessionStart) return;
 
   const now = new Date();
   const start = new Date(sessionStart);
-  const duration = Math.floor((now - start) / 1000); // in seconds
+  const duration = Math.floor((now - start) / 1000);
 
   const { error } = await supabase
     .from("views")
@@ -152,12 +174,12 @@ setInterval(async () => {
       session_duration: duration,
       last_activity: now.toISOString()
     })
-    .eq("session_id", sessionId);
+    .eq("ip", ip);
 
   if (error) {
-    console.error("Realtime session update failed:", error.message);
+    console.error("Session update failed:", error.message);
   }
-}, 10000); // Every 10 seconds
+}, 10000);
 
-// Auto-run on load
+// Auto-run
 trackUser();
