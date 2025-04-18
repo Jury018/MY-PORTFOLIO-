@@ -54,6 +54,7 @@
   animation: profile-about-entry 1.6s ease;
   max-width: 30rem;
   transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+  text-align: center;
 }
 
 .profile-container .short-about-me:hover {
@@ -80,14 +81,15 @@
 
 @media (min-width: 1000px) {
   .profile-container.fixed {
-    position: sticky;
-    top: 5.3rem;
-    max-height: 35rem;
-    width: 50rem;
+    position: static;
+    max-height: none;
     padding: 2.3rem 1.6rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 3rem;
   }
 }
 
