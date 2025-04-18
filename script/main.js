@@ -1,8 +1,6 @@
-// Import modules
 import { skillFunctionality } from "./skills.js";
 import { topNav } from "./topnav.js";
 import { animation } from "./animation.js";
-import { db, collection, addDoc, viewDocRef, getDoc, updateDoc, setDoc } from './firebase.js';
 
 // Initialize imported modules
 topNav();
@@ -13,7 +11,6 @@ animation();
 const copyright = `&copy;${new Date().getFullYear()} BONFIRE. All rights reserved`;
 document.querySelector('footer p').innerHTML = copyright;
 
-    
 // DOMContentLoaded Event
 document.addEventListener("DOMContentLoaded", async () => {
   // Add CSS styles dynamically
@@ -220,50 +217,16 @@ const validateName = () => {
     messageInput.addEventListener('input', updateWordCount);
 
     // Form submit event
-    form.addEventListener("submit", async (e) => {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
-
-      // Validate inputs
-      if (!validateName() || !updateWordCount()) {
-        return;
-      }
-
-      // Collect form data
-      const clientData = {
-        name: nameInput.value.trim(),
-        email: emailInput.value.trim(),
-        message: messageInput.value.trim(),
+      const showCustomAlert = (message) => {
+        const alertMessage = document.querySelector("#alertMessage");
+        alertMessage.textContent = message;
+        customAlert.style.display = "flex";
       };
-
-      try {
-        // Track page views in Firestore
-        const viewSnapshot = await getDoc(viewDocRef);
-        if (viewSnapshot.exists()) {
-          const currentCount = viewSnapshot.data().count || 0;
-          await updateDoc(viewDocRef, { count: currentCount + 1 });
-        } else {
-          await setDoc(viewDocRef, { count: 1 });
-        }
-
-        // Add client feedback to Firestore
-        await addDoc(collection(db, "clientFeedback"), clientData);
-
-        // Show success alert
-        const showCustomAlert = (message) => {
-          const alertMessage = document.querySelector("#alertMessage");
-          alertMessage.textContent = message;
-          customAlert.style.display = "flex";
-        };
-
-        showCustomAlert("Feedback submitted successfully!");
-        form.reset();
-        wordCountDisplay.textContent = 'Word count: 0'; // Reset word count
-      } catch (error) {
-        console.error("Error submitting feedback: ", error);
-        showCustomAlert("Failed to submit feedback. Please try again.");
-      }
+      showCustomAlert("Contact form submission is disabled as Firebase has been removed.");
     });
   } else {
     console.error("Form not found!");
   }
-});1
+});
