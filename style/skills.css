@@ -1,5 +1,5 @@
 /* SKILLS SECTION STYLING */
-#skills-section .heading {
+.section .heading {
   margin-bottom: 2rem;
   font-size: calc(var(--medium-Fsize) + 4px);
   color: var(--accent-color);
