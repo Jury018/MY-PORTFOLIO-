@@ -224,7 +224,8 @@ const validateName = () => {
         alertMessage.textContent = message;
         customAlert.style.display = "flex";
       };
-      showCustomAlert("Contact form submission is disabled as Firebase has been removed.");
+      showCustomAlert("Under maintenance. Please check back later.");
+      return;
     });
   } else {
     console.error("Form not found!");
