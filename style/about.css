@@ -1,18 +1,19 @@
 /* ABOUT SECTION HEADING */
-#about-section .heading {
-  font-size: clamp(2.5rem, 6vw, 5rem); /* Responsive font size */
-  color: var(--primary-color);
+
+.section .heading {
+  margin-bottom: 2rem;
+  font-size: calc(var(--medium-Fsize) + 10px);
+  color: var(--accent-color);
   text-align: center;
   text-transform: uppercase;
-  line-height: 1.2;
-  transition: color 0.3s ease, transform 0.3s ease;
+  letter-spacing: 1px;
 }
 
-#about-section .heading span {
+.section .heading span {
   color: var(--accent-color); /* Highlighted text */
 }
 
-#about-section .heading:hover {
+.section .heading:hover {
   color: var(--accent-color); /* Change to accent color on hover */
   transform: scale(1.05); /* Slight zoom effect */
   text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
@@ -20,90 +21,109 @@
 
 /* ABOUT CONTENT */
 #about-section .more-about-me {
-  font-size: var(--small-Fsize);
+  font-size: var(--XS-Fsize);
   color: var(--primary-color);
-  opacity: 0.8;
+  opacity: 0.9;
   margin: 2rem auto 4rem;
   max-width: 800px; /* Limit width for better readability */
-  line-height: 1.6;
+  line-height: 1.4;
   text-align: center;
   animation: fadeIn 1s forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* YEARS OF DOING GRID */
 #about-section .years-of-doing.d-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid */
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+  gap: 15px;
+  padding: 1rem;
   justify-items: center;
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+/* YEARS OF DOING ITEMS */
+#about-section .years-of-doing > div {
+  font-size: var(--XS-small-Fsize);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(255, 0, 150, 0.1), rgba(0, 150, 255, 0.1));
+  border: 1px solid var(--accent-color);
+  border-radius: 10px;
+  padding: 1rem;
+  transition: 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#about-section .years-of-doing > div:focus {
+  outline: 3px solid var(--accent-color);
+  outline-offset: 2px;
+  background: linear-gradient(135deg, rgba(255, 0, 150, 0.3), rgba(0, 150, 255, 0.3));
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+#about-section .years-of-doing > div:hover {
+  background: linear-gradient(135deg, rgba(255, 0, 150, 0.3), rgba(0, 150, 255, 0.3));
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 #about-section .years-of-doing .years {
-  font-size: clamp(2.5rem, 5vw, 4rem); /* Responsive font size */
-  color: var(--accent-color);
+  font-size: calc(var(--XS-Fsize) + 1px);
+  color: var(--primary-color);
+  text-align: center;
   font-weight: bold;
   transition: transform 0.3s ease, color 0.3s ease;
+  margin-bottom: 0.5rem;
 }
 
 #about-section .years-of-doing p {
-  font-size: var(--XS-Fsize);
+  font-size: calc(var(--XS-Fsize) + 1px);
   color: var(--primary-color);
   opacity: 0.8;
-  margin-top: 0.5rem;
+  margin-top: 0;
   line-height: 1.4;
-}
-
-/* HOVER EFFECTS */
-.years-of-doing .experience:hover,
-.years-of-doing .projects:hover,
-.years-of-doing .clients:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Add depth */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.years-of-doing .years:hover {
-  color: var(--primary-color-light); /* Subtle color change */
-  transform: scale(1.1); /* Slight zoom effect */
-}
-
-.years-of-doing p:hover {
-  color: var(--accent-color); /* Highlight text on hover */
-  font-size: calc(100% + 2px);
-  transition: color 0.3s ease, font-size 0.3s ease;
+  text-align: center;
 }
 
 /* RESPONSIVE DESIGN */
 @media (min-width: 1000px) {
   #about-section .more-about-me {
-    text-align: left;
-    margin: 2rem 0 4rem;
+    text-align: center;
+    margin: 2rem auto 4rem;
+    max-width: 800px;
   }
 
   #about-section .years-of-doing.d-grid {
-    grid-template-columns: repeat(3, 1fr); /* Adjust grid for larger screens */
-    justify-items: left;
-    text-align: left;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust grid for larger screens */
+    justify-items: center;
+    text-align: center;
     gap: 40px;
+    padding: 0;
+    max-width: 800px;
+    margin: 0 auto;
   }
 
   #about-section .years-of-doing .years {
-    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-size: calc(var(--medium-Fsize) + 2px);
     line-height: 1.2em;
+  }
+}
+
+@media (max-width: 999px) {
+  #about-section .years-of-doing.d-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 0 1rem;
+    max-width: 100%;
+    margin: 0 auto;
+    justify-items: center;
+    text-align: center;
   }
 }
 
